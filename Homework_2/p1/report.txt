@@ -1,0 +1,4 @@
++ Each single line of code is explained in file fibo.cpp
++ It causes compile error. myFunction is not declared before using in main, we need to declare its signature before start using it. To correct, add 'double myFunction(int n);' before main function (Refer to fibo.cpp file)
++ The overall functionality is to compute Fibonacci number. I will rename it into fibo. Given a non negative integer n, fibo returns (n + 3)th number in Fibonacci sequence (0,1,1,2,3,5,...), n = 3, it returns 5 which is 5th number in the sequence.
++ p = 144 after the function jumps back to the main function
