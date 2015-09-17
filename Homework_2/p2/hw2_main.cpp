@@ -108,132 +108,132 @@ unsigned int createTriangleStripModel(void)
 
     // SHADOW PARTS 21 points, 19 triangles
     vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 0.0;
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
-
-    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 1.0; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
-
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 0.0; 
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
-    
-    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 0.0; 
+    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 0.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
+    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 0.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 1.0; 
+    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 1.0; 
+    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 1.0; 
+    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
+    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
+    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 3.0; 
+    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 3.0; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 1.0; vertices[i++] = 1.0; vertices[i++] = 3.0; 
+    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 3.0; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 3.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 3.0; 
+    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 3.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
+    vertices[i++] = 1.0; vertices[i++] = 1.0; vertices[i++] = 3.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 3.0;
     colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    // NON SHADOW 6 points 4 triangles 
+    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 3.0;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
+
+    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
+
+    // NON SHADOW 6 points 4 triangles
+
+    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 3.0; 
+    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 3.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
+    vertices[i++] = 1.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 1.0; vertices[i++] = 3.0; 
+    vertices[i++] = 1.0; vertices[i++] = 1.0; vertices[i++] = 3.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
+    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 3.0; 
+    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 3.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
     // NON SHADOW 2, 13 points , 11 triangles
-    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 0.0; 
+    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 0.0; 
+    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 0.0; 
+    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 0.0; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 0.0; 
+    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 0.0; 
+    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 0.0; 
+    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 0.0; 
+    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
+    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 0.0; 
+    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
+    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 0.0; 
+    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 1.0; 
+    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 0.0; 
+    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 1.0; 
+    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
     glGenVertexArrays(2, &vaoID[0]); // Create our Vertex Array Object
@@ -280,118 +280,118 @@ unsigned int createMyModel(void)
     int j = 0;
 
     // FIRST FAN - BOTTOM LEFT OF FRONT -SHADOW
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 3.0; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 3.0;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 3.0; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 3.0;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 1; vertices[i++] = 1; vertices[i++] = 3; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 1; vertices[i++] = 1; vertices[i++] = 3;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 1; vertices[i++] = 0; vertices[i++] = 3; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 1; vertices[i++] = 0; vertices[i++] = 3;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 1; vertices[i++] = 0; vertices[i++] = 1; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 1; vertices[i++] = 0; vertices[i++] = 1;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0; vertices[i++] = 0; vertices[i++] = 1; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 0; vertices[i++] = 0; vertices[i++] = 1;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
     // SECOND FAN - MIDDLE of shadow start at 8
-    vertices[i++] = 0; vertices[i++] = 0; vertices[i++] = 1; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 0; vertices[i++] = 0; vertices[i++] = 1;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0; vertices[i++] = 2; vertices[i++] = 1; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 0; vertices[i++] = 2; vertices[i++] = 1;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0; vertices[i++] = 2; vertices[i++] = 0; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 0; vertices[i++] = 2; vertices[i++] = 0;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0; vertices[i++] = 0; vertices[i++] = 0; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 0; vertices[i++] = 0; vertices[i++] = 0;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 3; vertices[i++] = 0; vertices[i++] = 0; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 3; vertices[i++] = 0; vertices[i++] = 0;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 3; vertices[i++] = 0; vertices[i++] = 1; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 3; vertices[i++] = 0; vertices[i++] = 1;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 3; vertices[i++] = 1; vertices[i++] = 1; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 3; vertices[i++] = 1; vertices[i++] = 1;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 1; vertices[i++] = 2; vertices[i++] = 1; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 1; vertices[i++] = 2; vertices[i++] = 1;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
-    vertices[i++] = 0; vertices[i++] = 2; vertices[i++] = 1; 
-    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51; 
+    vertices[i++] = 0; vertices[i++] = 2; vertices[i++] = 1;
+    colors[j++] = 0.14; colors[j++] = 0.25; colors[j++] = 0.51;
 
     // TOP RIGHT OF FRONT OBJECT NON SHADOW
-    vertices[i++] = 1.0; vertices[i++] = 1.0; vertices[i++] = 3.0; 
+    vertices[i++] = 1.0; vertices[i++] = 1.0; vertices[i++] = 3.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 3.0; 
+    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 3.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
+    vertices[i++] = 0.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
+    vertices[i++] = 1.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
+    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 3.0; 
+    vertices[i++] = 1.0; vertices[i++] = 0.0; vertices[i++] = 3.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
     // BACK AND FRONT OF NONT SHADOW, 9 vertices
 
-    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 0.0; 
+    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 0.0; 
+    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 1.0; 
+    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 1.0; 
+    vertices[i++] = 1.0; vertices[i++] = 2.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
+    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 0.0; 
+    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 0.0; 
+    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 0.0; 
+    vertices[i++] = 0.0; vertices[i++] = 0.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 0.0; 
+    vertices[i++] = 0.0; vertices[i++] = 2.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
     // FINAL FRONT, 4 vetices
 
-    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 0.0; 
+    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 0.0; 
+    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 0.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 1.0; 
+    vertices[i++] = 3.0; vertices[i++] = 1.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
-    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 1.0; 
+    vertices[i++] = 3.0; vertices[i++] = 0.0; vertices[i++] = 1.0;
     colors[j++] = 0.31; colors[j++] = 0.49; colors[j++] = 0.79;
 
     glGenVertexArrays(2, &vaoID[1]); // Create our Vertex Array Object
