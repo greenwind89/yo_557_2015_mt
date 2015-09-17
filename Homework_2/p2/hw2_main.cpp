@@ -2,8 +2,7 @@
 //  main.cpp
 //  OpenGL4Test
 //
-//  Created by Rafael Radkowski on 5/28/15.
-//  Copyright (c) 2015 -. All rights reserved.
+//  Created by Minh Truong
 //
 
 // stl include
