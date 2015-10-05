@@ -109,7 +109,7 @@ int main(int argc, const char * argv[])
         SetTrackballLocation(trackball.getRotationMatrix());
 
         // draw the objects
-        cs->draw();
+        // cs->draw();
 
         // sphereRed->draw();
         sphereYellow->draw();

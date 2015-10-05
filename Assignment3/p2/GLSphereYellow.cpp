@@ -91,7 +91,7 @@ void GLSphereYellow::initShader(void)
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Material
-    _material._diffuse_material = glm::vec3(1.0, 1.0, 0.0);
+    _material._diffuse_material = glm::vec3(0.8, 0.8, 0.0);
     _material._ambient_material = glm::vec3(1.0, 1.0, 0.0);
     _material._specular_material = glm::vec3(1.0, 1.0, 1.0);
     _material._shininess = 1.0;
@@ -117,7 +117,7 @@ void GLSphereYellow::initShader(void)
     _light_source0._lightPos = glm::vec4(-15.0f, -7.0f, -7.0,1.0);
     _light_source0._ambient_intensity = 0.0;
     _light_source0._specular_intensity = 0.0;
-    _light_source0._diffuse_intensity = 1.9;
+    _light_source0._diffuse_intensity = 0.8;
 
 
 
@@ -139,7 +139,7 @@ void GLSphereYellow::initShader(void)
     _light_source1._lightPos = glm::vec4(-25.0, 0.0, 2.0, 0.0);
     _light_source1._ambient_intensity = 0.0;
     _light_source1._specular_intensity = 3.0;
-    _light_source1._diffuse_intensity = 4.5;
+    _light_source1._diffuse_intensity = 2.5;
     _light_source1._attenuation_coeff = 0.02;
 
     _light_source1._cone_angle = 4.5; // in degree
@@ -170,7 +170,7 @@ void GLSphereYellow::initShader(void)
     _light_source2._lightPos = glm::vec4(-25.0, -5.0, -3.0, 0.0);
     _light_source2._ambient_intensity = 0.0;
     _light_source2._specular_intensity = 1.0;
-    _light_source2._diffuse_intensity = 1.5;
+    _light_source2._diffuse_intensity = 1.0;
     _light_source2._attenuation_coeff = 0.02;
 
     _light_source2._cone_angle = 4.5; // in degree
@@ -199,14 +199,14 @@ void GLSphereYellow::initShader(void)
 
 
     // Spot light 3
-    _light_source3._lightPos = glm::vec4(-24.0, 4.0, -2.0, 0.0);
+    _light_source3._lightPos = glm::vec4(-43.0, 7.75, 15.5, 0.0);
     _light_source3._ambient_intensity = 0.0;
-    _light_source3._specular_intensity = 0.3;
-    _light_source3._diffuse_intensity = 1.0;
+    _light_source3._specular_intensity = 0.5;
+    _light_source3._diffuse_intensity = 6.8;
     _light_source3._attenuation_coeff = 0.02;
 
-    _light_source3._cone_angle = 18.5; // in degree
-    _light_source3._cone_direction = glm::vec3(24, -4, 2); // this must be aligned with the object and light position.
+    _light_source3._cone_angle = 6.75; // in degree
+    _light_source3._cone_direction = glm::vec3(27, -4.5, -12.5); // this must be aligned with the object and light position.
 
 
     // Read all the index values from the shader program

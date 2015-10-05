@@ -233,7 +233,7 @@ vec3 getLight3() {
 
     // Diffuse color
     float diffuse_coefficient3 = max( dot(transformedNormal, surface_to_light3), 0.0);
-    vec3 out_diffuse_color3 = diffuse_color  * diffuse_coefficient3 * diffuse_intensity3;
+    vec3 out_diffuse_color3 = ambient_color  * diffuse_coefficient3 * diffuse_intensity3;
 
     // Ambient color
     vec3 out_ambient_color3 = vec3(ambient_color) * ambient_intensity3;
@@ -269,7 +269,7 @@ vec3 getLight3() {
    if(light_to_surface_angle3 > cone_angle3){
   	 attenuation3 = 0.0;
    } else {
-    spotEffect3 = 1 - smoothstep(cone_angle3 - 7, cone_angle3, light_to_surface_angle3);
+    spotEffect3 = 1 - smoothstep(cone_angle3 - 15.15, cone_angle3, light_to_surface_angle3) + 0.003;
 
   }
 
