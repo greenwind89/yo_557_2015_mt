@@ -30,8 +30,10 @@ include_directories(${CMAKE_SOURCE_DIR}/../gl_common/)
 # Add all files to the configuration
 file(GLOB HCI557_ass3_p2_SRC
 	main_p2.cpp
-    GLSphereDirect.h
-    GLSphereDirect.cpp
+    GLSphereRed.h
+    GLSphereRed.cpp
+    GLSphereYellow.h
+    GLSphereYellow.cpp
     ../gl_common/HCI557Common.cpp
     ../gl_common/HCI557Common.h
 	../gl_common/controls.cpp

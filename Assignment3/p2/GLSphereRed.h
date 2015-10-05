@@ -35,27 +35,28 @@
 
 
 
-class GLSphereDirect : public GLSphere
+class GLSphereRed : public GLSphere
 {
 public:
-    
-    GLSphereDirect(float center_x, float center_y, float center_z, float radius, int rows = 10, int segments = 10 );
-    ~GLSphereDirect();
-    
-    
+
+    GLSphereRed(float center_x, float center_y, float center_z, float radius, int rows = 10, int segments = 10 );
+    ~GLSphereRed();
+
+
 protected:
-    
-    
-    
+
+
+
     /*
      Inits the shader program for this object
      */
     virtual void initShader(void);
-    
-    
+
+
     // The spotlight object
-    GLLightSource           _light_source1;
-    
+    GLSpotLightSource           _light_source1;
+    GLLightSource           _light_source0;
+
 
 
 };

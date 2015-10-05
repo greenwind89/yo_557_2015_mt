@@ -28,7 +28,8 @@
 #include "controls.h"
 #include "HCI557Common.h"
 #include "CoordSystem.h"
-#include "GLSphereDirect.h"
+#include "GLSphereRed.h"
+#include "GLSphereYellow.h"
 
 
 
@@ -67,23 +68,23 @@ int main(int argc, const char * argv[])
     //// Create some models
 
     // coordinate system
+    CoordSystem* cs = new CoordSystem(40.0);
 
-    GLSphereDirect* sphere1 = new GLSphereDirect(0.0, 0.0, 0.0, 4.0, 90, 50);
-    GLSphereDirect* sphere2 = new GLSphereDirect(9.0, 0.0, 0.0, 4.0, 90, 50);
-    GLSphereDirect* sphere3 = new GLSphereDirect(-9.0, 0.0, 0.0, 4.0, 90, 50);
-    GLSphereDirect* sphere4 = new GLSphereDirect(-18.0, 0.0, 0.0, 4.0, 90, 50);
+
+    GLSphereRed* sphereRed = new GLSphereRed(0.0, 0.0, 0.0, 10.0, 1000, 200);
+    GLSphereYellow* sphereYellow = new GLSphereYellow(0.0, 0.0, 0.0, 10.0, 1000, 200);
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //// Main render loop
 
     // Set up our green background color
-    static const GLfloat clear_color[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    static const GLfloat clear_color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     static const GLfloat clear_depth[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
     // This sets the camera to a new location
     // the first parameter is the eye position, the second the center location, and the third the up vector.
-    SetViewAsLookAt(glm::vec3(-5.0f, 20.0f, 0.5f), glm::vec3(-5.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    SetViewAsLookAt(glm::vec3(-15.5f, -1.0f, -1.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 
     // Enable depth test
@@ -108,11 +109,10 @@ int main(int argc, const char * argv[])
         SetTrackballLocation(trackball.getRotationMatrix());
 
         // draw the objects
+        cs->draw();
 
-        sphere1->draw();
-        sphere2->draw();
-        sphere3->draw();
-        sphere4->draw();
+        // sphereRed->draw();
+        sphereYellow->draw();
 
         //// This renders the objects
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,6 +124,8 @@ int main(int argc, const char * argv[])
 
     }
 
+
+    delete cs;
 
 
 }

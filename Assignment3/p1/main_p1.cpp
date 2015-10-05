@@ -77,12 +77,12 @@ int main(int argc, const char * argv[])
     //// Main render loop
 
     // Set up our green background color
-    static const GLfloat clear_color[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    static const GLfloat clear_color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     static const GLfloat clear_depth[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
     // This sets the camera to a new location
     // the first parameter is the eye position, the second the center location, and the third the up vector.
-    SetViewAsLookAt(glm::vec3(-1.0f, 0.0f, 17.5f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    SetViewAsLookAt(glm::vec3(-1.0f, -1.0f, 17.5f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 
     // Enable depth test
@@ -107,7 +107,7 @@ int main(int argc, const char * argv[])
         SetTrackballLocation(trackball.getRotationMatrix());
 
         // draw the objects
-        cs->draw();
+        // cs->draw();
 
         sphere->draw();
 
