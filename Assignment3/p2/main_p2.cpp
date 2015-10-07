@@ -113,9 +113,9 @@ int main(int argc, const char * argv[])
         // draw the objects
         cs->draw();
 		
-		sphereRed->draw();
+//		sphereRed->draw();
 //		sphereBlue->draw();
-//		sphereGreen->draw();
+		sphereGreen->draw();
 //		sphereYellow->draw();
 		
         //// This renders the objects
