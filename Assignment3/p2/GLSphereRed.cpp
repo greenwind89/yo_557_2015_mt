@@ -114,8 +114,8 @@ void GLSphereRed::initShader(void)
 
 
     // a normal light
-    _light_source0._lightPos = glm::vec4(-25.0f, -2.0f, 5.0,1.0);
-    _light_source0._ambient_intensity = 0.1;
+    _light_source0._lightPos = glm::vec4(-25.0f, -2.0f, 8.0,1.0);
+    _light_source0._ambient_intensity = 0.01;
     _light_source0._specular_intensity = 0.1;
     _light_source0._diffuse_intensity = 5.8;
 
@@ -139,7 +139,7 @@ void GLSphereRed::initShader(void)
     _light_source1._lightPos = glm::vec4(-25.0, 0.0, 2.0, 0.0);
     _light_source1._ambient_intensity = 0.0;
     _light_source1._specular_intensity = 3.0;
-    _light_source1._diffuse_intensity = 6.5;
+    _light_source1._diffuse_intensity = 8.5;
     _light_source1._attenuation_coeff = 0.02;
 
     _light_source1._cone_angle = 4.5; // in degree

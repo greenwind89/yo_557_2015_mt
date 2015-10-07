@@ -114,7 +114,7 @@ void GLSphereDirect::initShader(void)
 
 
     // Normal light
-    _light_source0._lightPos = glm::vec4(0.0, 0.0, 25.0,1.0);
+    _light_source0._lightPos = glm::vec4(10.0, 10.0, 25.0,1.0);
     _light_source0._ambient_intensity = 0.0;
     _light_source0._specular_intensity = 0.0;
     _light_source0._diffuse_intensity = 10.0;
@@ -137,14 +137,14 @@ void GLSphereDirect::initShader(void)
 
     // Spot Light
     // define the position of the light and send the light position to your shader program
-    _light_source1._lightPos = glm::vec4(0.0, 0.0, 25.0, 0.0);
+    _light_source1._lightPos = glm::vec4(10.0, 10.0, 25.0, 0.0);
     _light_source1._ambient_intensity = 0.0;
     _light_source1._specular_intensity = 0.0;
-    _light_source1._diffuse_intensity = 2.0;
+    _light_source1._diffuse_intensity = 10.0;
     _light_source1._attenuation_coeff = 0.02;
 
-    _light_source1._cone_angle = 5; // in degree
-    _light_source1._cone_direction = glm::vec3(0.0, 0.0, -25.0); // this must be aligned with the object and light position.
+    _light_source1._cone_angle = 4; // in degree
+    _light_source1._cone_direction = glm::vec3(-10.0, -10.0, -25.0); // this must be aligned with the object and light position.
 
 
     // Read all the index values from the shader program
