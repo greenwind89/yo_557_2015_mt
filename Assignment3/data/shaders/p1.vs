@@ -91,19 +91,13 @@ void main(void)
 
     // 4. Last, we compare the angle with the current direction and
     //    reduce the attenuation to 0.0 if the light is outside the angle.
-    float spotEffect  = 1.0;
+    //float spotEffect  = 1.0;
 	if(light_to_surface_angle > cone_angle){
   		attenuation = 0.0;
-	} else {
-    spotEffect = 1 - smoothstep(cone_angle - 1.3, cone_angle, light_to_surface_angle);
-
-    // if(spotEffect == 0) {
-    //   spotEffect = 100;
-    // }
-  }
+	}
 
 	// Calculate the linear color
-	vec3 linearColor = out_ambient_color  + spotEffect * attenuation * ( out_diffuse_color + out_specular_color);
+	vec3 linearColor = out_ambient_color  +  attenuation * ( out_diffuse_color + out_specular_color);
 
 // second light source
 
