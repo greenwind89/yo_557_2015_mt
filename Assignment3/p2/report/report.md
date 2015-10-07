@@ -15,6 +15,22 @@ The spot light has color white, to avoid passing more color, we use specular col
 The sphere is placed in the center and we always direct the light toward the center, so we try to change the position of the light to the right to create the shadow on the left.
 
 
+#### Blue sphere, Diffuse surface, no highlights are visible
+![alt text](./imgs/blue-sphere.png)
+Normal, diffuse light is all that is necessary for this sphere. To avoid seeing any highlights, there is no specular light. Ambient light could be applied, but is not necessary. The blue is made more dull by reducing the diffuse coefficient, which is equivalent to reducing the blue RGB value.
+
+The light position is 7 units in front of the face of the sphere we are seeing, just forward and to the right of the camera, so that the light is weighted torwards the bottom right. The attenuation coefficient of 0.025 helps show this.
+
+
+#### Green sphere, Spotlight with small highlight and sharp cutoff angle
+![alt text](./imgs/green-sphere.png)
+This sphere is achieved by using two spotlights, one with green diffuse light, and one with white specular light.
+
+For the diffuse spotlight, the hard cutoff angle is achieved by using no attenuation or smoothing. The trick to getting the abnormal shape as well as the shading on the left side is to direct the light cone partially off of the sphere. The light is moved to the right of the camera so that we are seeing some of the light as it fades off on the back side of the sphere (with respect to the light position). This is the same concept as us seeing some sunlight when the sun falls behind Earth.
+
+The highlight is from the other specular spotlight which is positioned behind the camera with an angle of 5 degrees. It combines specular and diffuse light with an attenuation coefficient of .02. To obtain a highlight that appears more "concentrated", the inner angle is only 4.5, resulting in smoothing over the .5 degrees.
+
+
 #### Yellow sphere, little highlight and smooth cutoff angle
 ![alt text](./imgs/yellow-sphere.png)
 
