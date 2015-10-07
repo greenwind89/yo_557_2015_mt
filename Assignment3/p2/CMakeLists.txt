@@ -32,6 +32,10 @@ file(GLOB HCI557_ass3_p2_SRC
 	main_p2.cpp
     GLSphereRed.h
     GLSphereRed.cpp
+    GLSphereBlue.h
+    GLSphereBlue.cpp
+    GLSphereGreen.h
+    GLSphereGreen.cpp
     GLSphereYellow.h
     GLSphereYellow.cpp
     ../gl_common/HCI557Common.cpp

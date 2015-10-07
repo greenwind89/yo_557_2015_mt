@@ -30,7 +30,8 @@
 #include "CoordSystem.h"
 #include "GLSphereRed.h"
 #include "GLSphereYellow.h"
-
+#include "GLSphereBlue.h"
+#include "GLSphereGreen.h"
 
 
 
@@ -72,8 +73,9 @@ int main(int argc, const char * argv[])
 
 
     GLSphereRed* sphereRed = new GLSphereRed(0.0, 0.0, 0.0, 10.0, 1000, 200);
-    GLSphereYellow* sphereYellow = new GLSphereYellow(0.0, 0.0, 0.0, 10.0, 1000, 200);
-
+	GLSphereYellow* sphereYellow = new GLSphereYellow(0.0, 0.0, 0.0, 10.0, 1000, 200);
+	GLSphereBlue* sphereBlue = new GLSphereBlue(0.0, 0.0, 0.0, 10.0, 1000, 200);
+	GLSphereGreen* sphereGreen = new GLSphereGreen(0.0, 0.0, 0.0, 10.0, 1000, 2000);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //// Main render loop
@@ -109,11 +111,13 @@ int main(int argc, const char * argv[])
         SetTrackballLocation(trackball.getRotationMatrix());
 
         // draw the objects
-        // cs->draw();
-
-        // sphereRed->draw();
-        sphereYellow->draw();
-
+        cs->draw();
+		
+		sphereRed->draw();
+//		sphereBlue->draw();
+//		sphereGreen->draw();
+//		sphereYellow->draw();
+		
         //// This renders the objects
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

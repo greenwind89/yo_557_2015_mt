@@ -1,5 +1,7 @@
 ## Report
 
+![alt text](./imgs/sphere-comparison.png)
+
 
 #### Red sphere, highlight on the surface of diffuse object
 ![alt text](./imgs/red-sphere.png)
