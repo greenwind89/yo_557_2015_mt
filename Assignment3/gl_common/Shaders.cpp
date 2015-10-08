@@ -155,19 +155,6 @@ string LoadFromFile(string path_and_file)
 
 
 
-string GetVariableName(string struct_name, string variable_name, int index )
-{
-    string name = struct_name;
-    name.append("[");
-    name.append(to_string(index));
-    name.append("].");
-    name.append(variable_name);
-    
-    return name;
-}
-
-
-
 
 
 

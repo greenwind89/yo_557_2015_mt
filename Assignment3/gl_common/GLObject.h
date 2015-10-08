@@ -62,26 +62,6 @@ public:
     virtual void draw(void) = 0;
     
     
-    /*!
-     Add the model view matrix, especially the three shader program objects to
-     the shader program "program"
-     */
-    bool addModelViewMatrixToProgram(GLuint program);
-    
-    
-    
-    /*!
-     Set the appearance of this object
-     */
-    void setApperance(GLAppearance& apperance);
-    
-    
-    /*!
-     Set a model matrix to move the object around
-     @param matrix - the model matrix for this object.
-     */
-    void setMatrix(glm::mat4& matrix);
-    
     
 protected:
     
@@ -95,42 +75,23 @@ protected:
      Inits the shader program for this object
      */
     virtual void initShader(void) = 0;
-    
+
 
     // Model view projection paramaters
     glm::mat4 projectionMatrix(void);
     glm::mat4 viewMatrix(void);
-    glm::mat4 invViewMatrix(void);
     
     // returns the rotated view matrix, mulitplied with the trackball. 
     glm::mat4 rotatedViewMatrix(void);
-    glm::mat4 invRotatedViewMatrix(void);
+    
     
     // The location of teh view matrix and the projection matrix inside the shader code.
     int                     _viewMatrixLocation;
     int                     _projectionMatrixLocation;
-    int                     _inverseViewMatrixLocation;
     
-    // Stores teh model matrix and the model matrix location
-    int                     _modelMatrixLocation;
-    glm::mat4               _modelMatrix; // Store the model matrix
     
     
     // The material for this object
     GLMaterial              _material;
     
-    
-    // An apperance object
-    GLAppearance            _apperance;
-    
 };
-
-
-
-
-
-
-
-
-
-

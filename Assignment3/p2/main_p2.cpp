@@ -1,9 +1,8 @@
 //
-//  main_spotlight.cpp
-//  HCI 557 Spotlight example
-//
-//  Created by Rafael Radkowski on 5/28/15.
-//  Copyright (c) 2015 -. All rights reserved.
+// Created by
+// Matthew Gardner
+// Tianshuang Gao
+// Minh Truong
 //
 
 // stl include
@@ -112,12 +111,12 @@ int main(int argc, const char * argv[])
 
         // draw the objects
         cs->draw();
-		
+
 //		sphereRed->draw();
 //		sphereBlue->draw();
 		sphereGreen->draw();
 //		sphereYellow->draw();
-		
+
         //// This renders the objects
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
