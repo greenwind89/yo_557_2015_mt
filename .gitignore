@@ -65,3 +65,5 @@ Debug
 *.cmake
 CMakeCache.txt
 cmake_install.cmake
+
+SDK/
