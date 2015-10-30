@@ -467,5 +467,19 @@ void GLAppearance::setTexture(GLMultiTexture* texture)
 
 }
 
+// support new texture class
+void GLAppearance::setTexture(TripleTexture* texture)
+{
+    if(_finalized)
+    {
+        cerr << "Apperance already finalized. Material cannot be set" << endl;
+        return;
+    }
+    
+    _textures.push_back(texture);
+    texture->addVariablesToProgram(_program, -1);
+
+}
+
 
 

@@ -25,6 +25,7 @@
 // locals
 #include "GLAppearanceBase.h"
 #include "Texture.h"
+#include "TripleTexture.h"
 
 
 using namespace std;
@@ -350,6 +351,7 @@ public:
      */
     void setTexture(GLTexture* texture);
     void setTexture(GLMultiTexture* texture);
+    void setTexture(TripleTexture* texture);
     
 protected:
     

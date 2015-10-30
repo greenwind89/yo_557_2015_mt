@@ -30,6 +30,7 @@
 #include "CoordSystem.h"
 #include "Plane3D.h"
 #include "Texture.h"
+#include "TripleTexture.h"
 
 
 
@@ -74,7 +75,7 @@ int main(int argc, const char * argv[])
     
     
     // create an apperance object.
-    GLAppearance* apperance_0 = new GLAppearance("../../data/shaders/multi_texture.vs", "../../data/shaders/multi_texture.fs");
+    GLAppearance* apperance_0 = new GLAppearance("../../data/shaders/triple_texture.vs", "../../data/shaders/triple_texture.fs");
     
     GLDirectLightSource  light_source;
     light_source._lightPos = glm::vec4(00.0,20.0,20.0, 0.0);
@@ -112,8 +113,8 @@ int main(int argc, const char * argv[])
     
     //************************************************************************************************
     // Add a texture
-    GLMultiTexture* texture = new GLMultiTexture();
-    int texid = texture->loadAndCreateTextures("../../data/landscape_1.bmp", "../../data/colors_1.bmp");
+    TripleTexture* texture = new TripleTexture();
+    int texid = texture->loadAndCreateTextures("../../data/landscape_1.bmp", "../../data/colors_1.bmp", "../../data/animal_2.bmp");
     //int texid = texture->loadAndCreateTexture("../../data/textures/texture_earth_128x128_a.bmp");
     apperance_0->setTexture(texture);
     

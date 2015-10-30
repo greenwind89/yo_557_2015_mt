@@ -50,6 +50,8 @@ file(GLOB HCI557_ass4_p1_SRC
     ../gl_common/Plane3d.cpp
     ../gl_common/Texture.h
     ../gl_common/Texture.cpp
+    ../gl_common/TripleTexture.h
+    ../gl_common/TripleTexture.cpp
     ../gl_common/HCI557Datatypes.h
     ../gl_common/GLAppearanceBase.h
     ../gl_common/GLAppearance.h
