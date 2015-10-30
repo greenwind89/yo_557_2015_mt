@@ -120,7 +120,7 @@ int main(int argc, const char * argv[])
     
     
     // create the sphere geometry
-    GLPlane3D* plane_0 = new GLPlane3D(0.0, 0.0, 0.0, 50.0, 50.0);
+    GLPlane3D* plane_0 = new GLPlane3D(0.0, 0.0, 0.0, 100.0, 50.0);
     plane_0->setApperance(*apperance_0);
     plane_0->init();
     
