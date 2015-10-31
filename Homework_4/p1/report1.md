@@ -1,7 +1,10 @@
 ## Report 1
 Members: Floyd R, Fei Xu, Minh Truong
 
-![alt text](../data/3-images.bmp)
+
+<img src="../data/colors_1.jpg" width="180px" height="150px" />
+<img src="../data/landscape1.png" width="180px" height="150px" />
+<img src="../data/animal_2.jpg" width="180px" height="150px" />
 
 Above are the three images we chose for this assignment.
 
