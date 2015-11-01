@@ -71,7 +71,7 @@ int main(int argc, const char * argv[])
 
 
     // create an apperance object.
-    GLAppearance* apperance_0 = new GLAppearance("../../data/shaders/triple_texture.vs", "../../data/shaders/triple_texture.fs");
+    GLAppearance* apperance_0 = new GLAppearance("../triple_texture.vs", "../triple_texture.fs");
 
     GLDirectLightSource  light_source;
     light_source._lightPos = glm::vec4(00.0,20.0,20.0, 0.0);

@@ -30,3 +30,5 @@ And it results in the following image:
 <img src="../data/blend_2.png" width="350px" height="250px" />
 
 When we use the multiplicative blending method, areas that are dark in one image are dark regardless of what is in the other images. The same applies to areas that are not blue, areas that are not green, and areas that are not red.  This leaves only the areas that have colors in common or are largely white in one image.
+
+One notice about implementation is that because our Triple_texture class inherits GLTexture and being used ing GLAppearance so we found that it needs to be placed in gl_common to be able to compiled together with GLTexture and GLAppearance so we placed TripleTexture.cpp and TripleTexture.h in gl_common

@@ -1,4 +1,4 @@
-# Main cmake file 
+# Main cmake file
 # Multi Texture example
 # Rafael Radkowski, rafael@iastate.edu
 # Iowa State University
