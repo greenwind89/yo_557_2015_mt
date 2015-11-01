@@ -1,6 +1,6 @@
 #version 410 core
-//  Created by Floyd R, Fei XU, Minh Truong
 
+//  Created by Floyd R, Fei XU, Minh Truong
 uniform sampler2D texture_background; //this is the texture
 uniform sampler2D texture_foreground; //this is the texture
 uniform sampler2D texture_extra; //this is the texture
