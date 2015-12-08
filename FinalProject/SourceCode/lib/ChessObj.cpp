@@ -130,6 +130,7 @@ bool ChessObj::load_obj(const char* filename, vector<glm::vec3> &vertices, vecto
 
     string line;
     bool gettingF = false;
+    int count = 1;
     while (getline(in, line))
     {
         if (line.substr(0,2) == "f ") {
@@ -138,10 +139,16 @@ bool ChessObj::load_obj(const char* filename, vector<glm::vec3> &vertices, vecto
         }
         else {
           if(line.substr(0,2) == "v " && gettingF == true) {
-            piece->processTemp();
+            if(count % 2 == 0 && count < 9) {
+                piece->processTemp();
 
-            piece = new ChessPiece();
-            _pieces.push_back(piece);
+                piece = new ChessPiece();
+                _pieces.push_back(piece);
+
+
+
+            }
+            count++;
             gettingF = false;
           }
 
@@ -149,6 +156,7 @@ bool ChessObj::load_obj(const char* filename, vector<glm::vec3> &vertices, vecto
           piece->addLine(line);
         }
     }
+            //  piece->processTemp();
 
 
     return true;

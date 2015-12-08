@@ -25,7 +25,6 @@ class ChessPiece : public GLObject
     friend class RayIntersectionTest;
 
 public:
-    ChessPiece(string filename);
     ChessPiece();
     ~ChessPiece();
 
@@ -58,11 +57,6 @@ public:
     This function takes a vector of vertices and replaces the current vector.
     */
     void updateVertices(float* vertices);
-
-
-    void setModelName(string name);
-    void addLine(string line);
-    void processTemp();
 
 private:
 
@@ -97,6 +91,7 @@ private:
     // file and path of the loaded object
     string                  _file_and_path;
     bool                    _file_ok;
+    string _model_path;
 
 protected:
     // The data
@@ -104,13 +99,6 @@ protected:
     vector<glm::vec4>       _vertex_colors;
     vector<glm::vec3>       _normals;
     vector<GLuint>          _elements;
-
-    // temp variables
-    vector<glm::vec3> temp_normals;
-    vector<glm::vec3> temp_vertices;
-    vector<glm::vec3> temp_index_normal2point;
-    vector<glm::vec3> temp_index_triangle;
-    vector<glm::vec3> temp_index_textures;
 
 private:
     // obj file data

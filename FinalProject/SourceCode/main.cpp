@@ -31,7 +31,7 @@
 #include "Sphere3D.h"
 
 
-#include "ChessObj.h"
+#include "ChessGame.h"
 
 using namespace std;
 
@@ -101,16 +101,19 @@ int main(int argc, const char * argv[])
     apperance_0->updateLightSources();
 
 
-    // GLObjectObj* loadedModel1 = new GLObjectObj("../../data/chess.obj");
+    GLObjectObj* loadedModel1 = new GLObjectObj("../../data/chess_board_all.obj");
 
-    ChessObj* loaded = new ChessObj("../../data/chessobj.obj");
-    ChessPiece* loadedModel1 = loaded->getChessPiecesAt(1);
+    // ChessGame* game = new ChessGame();
+    // ChessPiece* loadedModel1 = game->getChessPiecesAt(0);
+
+    // GLObjectObj* loadedModel1 = new GLObjectObj("../../data/chessobj.obj");
 
     loadedModel1->setApperance(*apperance_0);
     loadedModel1->init();
 
 
     glm::mat4 tranform = glm::scale(glm::vec3(10.0, 10.0f, 10.0f));
+    // glm::mat4 tranform =   glm::translate(glm::vec3(-100.0, -100.0f, -100.0f)) * glm::scale(glm::vec3(100.0, 100.0f, 100.0f)) ;
     loadedModel1->setMatrix(tranform);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,6 +126,9 @@ int main(int argc, const char * argv[])
     // This sets the camera to a new location
     // the first parameter is the eye position, the second the center location, and the third the up vector.
     SetViewAsLookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+
+
+    // SetViewAsLookAt(glm::vec3(12.0f, 12.0f, 65.5f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 
     // Enable depth test

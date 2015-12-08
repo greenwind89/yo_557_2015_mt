@@ -57,11 +57,12 @@ file(GLOB HCI557_ObjLoader_SRC
 	../gl_common/camera.cpp
     ../gl_common/GLObjectObj.h
     ../gl_common/GLObjectObj.cpp
-    ./lib/ChessObj.h
-    ./lib/ChessObj.cpp
     ./lib/ChessPiece.h
     ./lib/ChessPiece.cpp
-
+    ./lib/ChessGame.h
+    ./lib/ChessGame.cpp
+    ./lib/Pawn.h
+    ./lib/Pawn.cpp
 )
 
 set(HCI557_RES

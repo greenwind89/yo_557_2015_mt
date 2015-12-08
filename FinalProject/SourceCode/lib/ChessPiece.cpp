@@ -5,17 +5,13 @@
 #include <algorithm>
 
 
-ChessPiece::ChessPiece(string filename):
-_file_and_path(filename)
-{
-
-    _file_ok = false;
-    _file_ok =load_obj(filename.c_str(), _vertices, _normals, _elements);
-
-}
-
 ChessPiece::ChessPiece()
 {
+    string filename = "../../data/Pawn.obj";
+
+    cout << "FILENAME" << filename;
+    _file_ok = false;
+    _file_ok =load_obj(filename.c_str(), _vertices, _normals, _elements);
 
 }
 
@@ -118,6 +114,185 @@ bool ChessPiece::extractNextFace3(string& in, string& out, int& pointIdx, int& t
 
 bool ChessPiece::load_obj(const char* filename, vector<glm::vec3> &vertices, vector<glm::vec3> &normals, vector<GLuint> &elements)
 {
+    ifstream in(filename, ios::in);
+    if (!in)
+    {
+        cerr << "Cannot open " << filename << endl;
+        return false;
+    }
+
+
+
+    vector<glm::vec3> temp_normals;
+    vector<glm::vec3> temp_vertices;
+    vector<glm::vec3> temp_index_normal2point;
+    vector<glm::vec3> temp_index_triangle;
+    vector<glm::vec3> temp_index_textures;
+
+    string line;
+    while (getline(in, line))
+    {
+        if (line.substr(0,2) == "v ")
+        {
+            istringstream s(line.substr(2));
+            glm::vec3 v; s >> v.x; s >> v.y; s >> v.z;// v.w = 1.0f;
+            temp_vertices.push_back(v);
+            _vertex_colors.push_back(glm::vec4(1.0,0.0,0.0,1.0));
+
+        }
+        else if (line.substr(0,2) == "f ")
+        {
+            int idx = line.find_first_of("/");
+            if(idx == -1)
+            {
+                istringstream s(line.substr(2));
+                GLushort a,b,c;
+                s >> a; s >> b; s >> c;
+                cout << a << " : " << b << " : " << c << endl;;
+                a--; b--; c--;
+
+                elements.push_back(a); elements.push_back(b); elements.push_back(c);
+            }
+            else
+            {
+
+                size_t n = std::count(line.begin(), line.end(), '/');
+                if(n == 0)
+                {
+                    string new_line;
+                    int p0, p1, p2;
+                    extractNextFace1(line, new_line, p0, p1, p2 );
+
+                    temp_index_triangle.push_back(glm::vec3(p0, p1, p2));
+                    temp_index_normal2point.push_back(glm::vec3(p0, p1, p2)); // same normal vectors.
+
+                }
+                else if(n == 3)
+                {
+                    string new_line;
+                    int p0, p1, p2;
+                    extractNextFace1(line, new_line, p0, p1, p2 );
+
+                    temp_index_triangle.push_back(glm::vec3(p0, p1, p2));
+                    temp_index_normal2point.push_back(glm::vec3(p0, p1, p2)); // same normal vectors.
+
+
+                }
+                else if(n==6 || n == 8)
+                {
+                    string new_line;
+                    int p0, t0,  n0;
+                    int p1, t1,  n1;
+                    int p2, t2,  n2;
+                    int p3, t3,  n3;
+
+                    // first
+                    extractNextFace3(line, new_line, p0, t0, n0 );
+
+                    // second
+                    extractNextFace3(new_line, new_line, p1, t1, n1 );
+
+                    // third
+                    extractNextFace3(new_line, new_line, p2, t2, n2 );
+
+                    // Quads and not triangles
+                    if(new_line.length() > 2)
+                    {
+                        // fourth
+                        extractNextFace3(new_line, new_line, p3, t3, n3 );
+                    }
+
+                    // remember the normal vectors
+                    temp_index_triangle.push_back(glm::vec3(p0, p1, p2));
+                    temp_index_normal2point.push_back(glm::vec3(n0, n1, n2));
+                    temp_index_textures.push_back(glm::vec3(t0, t1, t2));
+
+                    elements.push_back(p0);
+                    elements.push_back(p1);
+                    elements.push_back(p2);
+
+                }
+
+
+            }
+        }
+        else if (line.substr(0,3) == "vn ")
+        {
+            istringstream s(line.substr(3));
+            glm::vec3 n; s >> n.x; s >> n.y; s >> n.z;
+            temp_normals.push_back(n);
+        }
+        else if (line.substr(0,7) == "mtllib ")
+        {
+            istringstream s(line.substr(7));
+            s >> _material_file;
+            /* ignoring this line */
+        }
+        else if (line.substr(0,2) == "g ")
+        {
+            istringstream s(line.substr(2));
+            s >> _model_name;
+            /* ignoring this line */
+        }
+        else if (line[0] == '#')
+        {
+            /* ignoring this line */
+        }
+        else
+        {
+            /* ignoring this line */
+        }
+    }
+
+
+    /////////////////////////////////////////////
+    // assign normals to points and points to triangles.
+
+    cout << temp_index_triangle.size() << endl <<temp_vertices.size() << endl;
+    vertices.clear();
+    normals.clear();
+    for(int i=0; i<temp_index_triangle.size(); i++)
+    {
+        glm::vec3 pointIdx = temp_index_triangle[i];
+        glm::vec3 normalIdx = temp_index_normal2point[i];
+
+        // the three points of one triangle
+        // -1 since obj does not use the index 0
+        vertices.push_back(temp_vertices[ pointIdx.x-1 ]);
+        vertices.push_back(temp_vertices[ pointIdx.y-1 ]);
+        vertices.push_back(temp_vertices[ pointIdx.z-1 ]);
+
+        normals.push_back(temp_normals[normalIdx.x-1]);
+        normals.push_back(temp_normals[normalIdx.y-1]);
+        normals.push_back(temp_normals[normalIdx.z-1]);
+
+    }
+
+
+
+
+
+
+
+    if(normals.size() > 0) return true; // loaded normal vectors
+
+    normals.resize(vertices.size(), glm::vec3(0.0, 0.0, 0.0));
+    for (int i = 0; i < elements.size(); i+=3)
+    {
+        GLushort ia = elements[i];
+        GLushort ib = elements[i+1];
+        GLushort ic = elements[i+2];
+        glm::vec3 normal = glm::normalize(glm::cross(
+                                                     glm::vec3(vertices[ib]) - glm::vec3(vertices[ia]),
+                                                     glm::vec3(vertices[ic]) - glm::vec3(vertices[ia])));
+        normals[ia] = normals[ib] = normals[ic] = normal;
+
+
+       // _vertex_colors.push_back(glm::vec4(1.0,0.0,0.0,1.0));
+      //  _vertex_colors.push_back(glm::vec4(1.0,0.0,0.0,1.0));
+       // _vertex_colors.push_back(glm::vec4(1.0,0.0,0.0,1.0));
+    }
+
     return true;
 }
 
@@ -284,171 +459,5 @@ void ChessPiece::updateVertices(float* vertices)
 
     glVertexAttribPointer((GLuint)locPos, 3, GL_FLOAT, GL_FALSE, 0, 0); // Set up our vertex attributes pointer
     glEnableVertexAttribArray(locPos); //
-
-}
-
-
-void ChessPiece::setModelName(string name) {
-    _model_name = name;
-}
-
-void ChessPiece::addLine(string line) {
-
-    if (line.substr(0,2) == "v ")
-    {
-        istringstream s(line.substr(2));
-        glm::vec3 v; s >> v.x; s >> v.y; s >> v.z;// v.w = 1.0f;
-        temp_vertices.push_back(v);
-        _vertex_colors.push_back(glm::vec4(1.0,0.0,0.0,1.0));
-
-    }
-    else if (line.substr(0,2) == "f ")
-    {
-        int idx = line.find_first_of("/");
-        if(idx == -1)
-        {
-            istringstream s(line.substr(2));
-            GLushort a,b,c;
-            s >> a; s >> b; s >> c;
-            cout << a << " : " << b << " : " << c << endl;;
-            a--; b--; c--;
-
-            _elements.push_back(a); _elements.push_back(b); _elements.push_back(c);
-        }
-        else
-        {
-
-            size_t n = std::count(line.begin(), line.end(), '/');
-            if(n == 0)
-            {
-                string new_line;
-                int p0, p1, p2;
-                extractNextFace1(line, new_line, p0, p1, p2 );
-
-                temp_index_triangle.push_back(glm::vec3(p0, p1, p2));
-                temp_index_normal2point.push_back(glm::vec3(p0, p1, p2)); // same normal vectors.
-
-            }
-            else if(n == 3)
-            {
-                string new_line;
-                int p0, p1, p2;
-                extractNextFace1(line, new_line, p0, p1, p2 );
-
-                temp_index_triangle.push_back(glm::vec3(p0, p1, p2));
-                temp_index_normal2point.push_back(glm::vec3(p0, p1, p2)); // same normal vectors.
-
-
-            }
-            else if(n==6)
-            {
-                string new_line;
-                int p0, t0,  n0;
-                int p1, t1,  n1;
-                int p2, t2,  n2;
-                int p3, t3,  n3;
-
-                // first
-                extractNextFace3(line, new_line, p0, t0, n0 );
-
-                // second
-                extractNextFace3(new_line, new_line, p1, t1, n1 );
-
-                // third
-                extractNextFace3(new_line, new_line, p2, t2, n2 );
-
-                // Quads and not triangles
-                if(new_line.length() > 2)
-                {
-                    // fourth
-                    extractNextFace3(new_line, new_line, p3, t3, n3 );
-                }
-
-                // remember the normal vectors
-                temp_index_triangle.push_back(glm::vec3(p0, p1, p2));
-                temp_index_normal2point.push_back(glm::vec3(n0, n1, n2));
-                temp_index_textures.push_back(glm::vec3(t0, t1, t2));
-
-                _elements.push_back(p0);
-                _elements.push_back(p1);
-                _elements.push_back(p2);
-
-            }
-
-
-        }
-    }
-    else if (line.substr(0,3) == "vn ")
-    {
-        istringstream s(line.substr(3));
-        glm::vec3 n; s >> n.x; s >> n.y; s >> n.z;
-        temp_normals.push_back(n);
-    }
-    else if (line.substr(0,7) == "mtllib ")
-    {
-        istringstream s(line.substr(7));
-        s >> _material_file;
-        /* ignoring this line */
-    }
-    else if (line.substr(0,2) == "g ")
-    {
-        istringstream s(line.substr(2));
-        s >> _model_name;
-        // cout <<s <<endl;
-        /* ignoring this line */
-    }
-    else if (line[0] == '#')
-    {
-        /* ignoring this line */
-    }
-    else
-    {
-        /* ignoring this line */
-    }
-}
-
-void ChessPiece::processTemp() {
-
-    /////////////////////////////////////////////
-    // assign normals to points and points to triangles.
-
-    cout << _model_name << temp_index_triangle.size() <<endl;
-    _vertices.clear();
-    _normals.clear();
-    for(int i=0; i<temp_index_triangle.size(); i++)
-    {
-        glm::vec3 pointIdx = temp_index_triangle[i];
-        glm::vec3 normalIdx = temp_index_normal2point[i];
-
-        // the three points of one triangle
-        // -1 since obj does not use the index 0
-        _vertices.push_back(temp_vertices[ pointIdx.x-1 ]);
-        _vertices.push_back(temp_vertices[ pointIdx.y-1 ]);
-        _vertices.push_back(temp_vertices[ pointIdx.z-1 ]);
-
-        _normals.push_back(temp_normals[normalIdx.x-1]);
-        _normals.push_back(temp_normals[normalIdx.y-1]);
-        _normals.push_back(temp_normals[normalIdx.z-1]);
-
-    }
-
-    if(_normals.size() > 0) return true; // loaded normal vectors
-
-    _normals.resize(_vertices.size(), glm::vec3(0.0, 0.0, 0.0));
-    for (int i = 0; i < _elements.size(); i+=3)
-    {
-        GLushort ia = _elements[i];
-        GLushort ib = _elements[i+1];
-        GLushort ic = _elements[i+2];
-        glm::vec3 normal = glm::normalize(glm::cross(
-                                                     glm::vec3(_vertices[ib]) - glm::vec3(_vertices[ia]),
-                                                     glm::vec3(_vertices[ic]) - glm::vec3(_vertices[ia])));
-        _normals[ia] = _normals[ib] = _normals[ic] = normal;
-
-
-       // _vertex_colors.push_back(glm::vec4(1.0,0.0,0.0,1.0));
-      //  _vertex_colors.push_back(glm::vec4(1.0,0.0,0.0,1.0));
-       // _vertex_colors.push_back(glm::vec4(1.0,0.0,0.0,1.0));
-    }
 
 }
