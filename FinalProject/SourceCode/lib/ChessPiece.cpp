@@ -8,6 +8,7 @@
 ChessPiece::ChessPiece(string filename):
 _file_and_path(filename)
 {
+    _object_id = ObjectIdFactory::getId();
 
     _file_ok = false;
     _file_ok =load_obj(filename.c_str(), _vertices, _normals, _elements);
@@ -251,7 +252,7 @@ bool ChessPiece::load_obj(const char* filename, vector<glm::vec3> &vertices, vec
     /////////////////////////////////////////////
     // assign normals to points and points to triangles.
 
-    cout << temp_index_triangle.size() << endl <<temp_vertices.size() << endl;
+    // cout << temp_index_triangle.size() << endl <<temp_vertices.size() << endl;
     vertices.clear();
     normals.clear();
     for(int i=0; i<temp_index_triangle.size(); i++)
@@ -463,4 +464,9 @@ void ChessPiece::updateVertices(float* vertices)
     glVertexAttribPointer((GLuint)locPos, 3, GL_FLOAT, GL_FALSE, 0, 0); // Set up our vertex attributes pointer
     glEnableVertexAttribArray(locPos); //
 
+}
+
+
+ObjectId* ChessPiece::getObjectId() {
+    return _object_id;
 }

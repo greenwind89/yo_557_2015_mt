@@ -26,11 +26,18 @@ class ChessGame {
 private:
     vector<ChessPiece*> _pieces;
     vector<Tile*> _tiles;
-    GLAppearance* _apperance_default;
-    GLAppearance* _apperance_white_tile;
-    GLAppearance* _apperance_black_tile;
-    int size_of_tile = 5;
+
+    GLDirectLightSource _default_light_source;
+    GLMaterial _default_material;
+    GLMaterial _white_tile_material;
+    GLMaterial _black_tile_material;
+
+    void setPicking(GLObject* obj);
+    ChessPiece *_selected_piece;
+
 public:
+    int size_of_tile = 5;
+
     ChessGame();
 
     ChessPiece* getChessPiecesAt(int idx);
@@ -38,5 +45,18 @@ public:
     void build_chess_pieces();
     void setup_light_and_material();
     void draw();
+    void preDrawPicking();
+    void initPicking();
+    void handleSelectedColor(float col[4]);
+    void unhighlightAPiece(ChessPiece* p);
+    void highlightAPiece(ChessPiece* p);
+
+    ChessPiece* getObjectById(int id);
+
+    GLAppearance* getDefaultAppearance();
+    GLAppearance* getWhiteTileAppearance();
+    GLAppearance* getBlackTileAppearance();
+
+
 
 };

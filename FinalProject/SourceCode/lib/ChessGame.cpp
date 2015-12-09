@@ -21,12 +21,12 @@ void ChessGame::build_chess_board() {
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++) {
 
-            Tile* t = new Tile(2.5 + j*size_of_tile, 2.5 + i*size_of_tile, 0, size_of_tile, size_of_tile);
+            Tile* t = new Tile(size_of_tile/2 + j*size_of_tile, size_of_tile/2 + i*size_of_tile, 0, size_of_tile, size_of_tile);
 
             if((i + j) % 2 == 0 ) {
-                t->setApperance(*_apperance_white_tile);
+                t->setApperance(*(getWhiteTileAppearance()));
             } else {
-                t->setApperance(*_apperance_black_tile);
+                t->setApperance(*(getBlackTileAppearance()));
             }
 
             t->init();
@@ -46,7 +46,7 @@ void ChessGame::build_chess_pieces() {
     for (size_t i = 0; i < 8; i++) {
         ChessPiece* pawn1 = PieceFactory::get("pawn");
 
-        pawn1->setApperance(*_apperance_default);
+        pawn1->setApperance(*(getDefaultAppearance()));
         pawn1->init();
 
         // pawn is at second line
@@ -57,7 +57,7 @@ void ChessGame::build_chess_pieces() {
 
         ChessPiece* pawn2 = PieceFactory::get("pawn");
 
-        pawn2->setApperance(*_apperance_default);
+        pawn2->setApperance(*(getDefaultAppearance()));
         pawn2->init();
 
         // pawn is at second line
@@ -78,7 +78,7 @@ void ChessGame::build_chess_pieces() {
 
         ChessPiece* p1 = PieceFactory::get(type);
 
-        p1->setApperance(*_apperance_default);
+        p1->setApperance(*(getDefaultAppearance()));
         p1->init();
 
         // pawn is at second line
@@ -89,7 +89,7 @@ void ChessGame::build_chess_pieces() {
 
         ChessPiece* p2 = PieceFactory::get(type);
 
-        p2->setApperance(*_apperance_default);
+        p2->setApperance(*(getDefaultAppearance()));
         p2->init();
 
         // pawn is at second line
@@ -102,71 +102,41 @@ void ChessGame::build_chess_pieces() {
 
 void ChessGame::setup_light_and_material() {
     // create an apperance object.
-    GLAppearance* apperance_0 = new GLAppearance("../../data/shaders/multi_vertex_lights.vs", "../../data/shaders/multi_vertex_lights.fs");
 
-    GLDirectLightSource  light_source;
-    light_source._lightPos = glm::vec4(20.0,20.0,0.0, 0.0);
-    light_source._ambient_intensity = 0.2;
-    light_source._specular_intensity = 5.5;
-    light_source._diffuse_intensity = 2.0;
-    light_source._attenuation_coeff = 0.0;
+    _default_light_source._lightPos = glm::vec4(20.0,20.0,0.0, 0.0);
+    _default_light_source._ambient_intensity = 0.2;
+    _default_light_source._specular_intensity = 5.5;
+    _default_light_source._diffuse_intensity = 2.0;
+    _default_light_source._attenuation_coeff = 0.0;
 
     // add the light to this apperance object
-    apperance_0->addLightSource(light_source);
 
     // Create a material object
-    GLMaterial material_0;
-    material_0._diffuse_material = glm::vec3(1.0, 0.0, 0.2);
-    material_0._ambient_material = glm::vec3(1.0, 0.0, 0.2);
-    material_0._specular_material = glm::vec3(1.0, 1.0, 1.0);
-    material_0._shininess = 12.0;
-    material_0._transparency = 1.0;
+    _default_material._diffuse_material = glm::vec3(1.0, 0.0, 0.2);
+    _default_material._ambient_material = glm::vec3(1.0, 0.0, 0.2);
+    _default_material._specular_material = glm::vec3(1.0, 1.0, 1.0);
+    _default_material._shininess = 12.0;
+    _default_material._transparency = 1.0;
 
     // Add the material to the apperance object
-    apperance_0->setMaterial(material_0);
-    apperance_0->finalize();
-
-
-    // If you want to change appearance parameters after you init the object, call the update function
-    apperance_0->updateLightSources();
-    _apperance_default = apperance_0;
 
     // -------------------------- white tile =---------------------
 
-    GLAppearance* apperance_white_tile = new GLAppearance("../../data/shaders/multi_vertex_lights.vs", "../../data/shaders/multi_vertex_lights.fs");
 
-    GLMaterial material_white_tile;
-    material_white_tile._diffuse_material = glm::vec3(1.0, 1.0, 1.2);
-    material_white_tile._ambient_material = glm::vec3(1.0, 1.0, 1.2);
-    material_white_tile._specular_material = glm::vec3(1.0, 1.0, 1.0);
-    material_white_tile._shininess = 12.0;
-    material_white_tile._transparency = 1.0;
-
-    apperance_white_tile->addLightSource(light_source);
-    apperance_white_tile->setMaterial(material_white_tile);
-    apperance_white_tile->finalize();
-
-    apperance_white_tile->updateLightSources();
-    _apperance_white_tile =  apperance_white_tile;
+    _white_tile_material._diffuse_material = glm::vec3(1.0, 1.0, 1.2);
+    _white_tile_material._ambient_material = glm::vec3(1.0, 1.0, 1.2);
+    _white_tile_material._specular_material = glm::vec3(1.0, 1.0, 1.0);
+    _white_tile_material._shininess = 12.0;
+    _white_tile_material._transparency = 1.0;
 
 
     // -------------------------- black tile =---------------------
-    GLAppearance* apperance_black_tile = new GLAppearance("../../data/shaders/multi_vertex_lights.vs", "../../data/shaders/multi_vertex_lights.fs");
 
-    GLMaterial material_black_tile;
-    material_white_tile._diffuse_material = glm::vec3(0.0, 0.0, 0.0);
-    material_white_tile._ambient_material = glm::vec3(0.0, 0.0, 0.0);
-    material_white_tile._specular_material = glm::vec3(0.0, 0.0, 0.0);
-    material_white_tile._shininess = 12.0;
-    material_white_tile._transparency = 1.0;
-
-    apperance_black_tile->addLightSource(light_source);
-    apperance_black_tile->setMaterial(material_black_tile);
-    apperance_black_tile->finalize();
-
-    apperance_black_tile->updateLightSources();
-    _apperance_black_tile =  apperance_black_tile;
-
+    _black_tile_material._diffuse_material = glm::vec3(0.0, 0.0, 0.0);
+    _black_tile_material._ambient_material = glm::vec3(0.0, 0.0, 0.0);
+    _black_tile_material._specular_material = glm::vec3(0.0, 0.0, 0.0);
+    _black_tile_material._shininess = 12.0;
+    _black_tile_material._transparency = 1.0;
 
 }
 
@@ -182,5 +152,148 @@ void ChessGame::draw() {
         ChessPiece* piece = _pieces[i];
         piece->draw();
     }
+
+}
+
+GLAppearance* ChessGame::getDefaultAppearance() {
+    GLAppearance* appearance = new GLAppearance("../../data/shaders/multi_vertex_lights_ext.vs", "../../data/shaders/multi_vertex_lights.fs");
+
+    appearance->addLightSource(_default_light_source);
+    appearance->setMaterial(_default_material);
+    appearance->finalize();
+
+    // If you want to change appearance parameters after you init the object, call the update function
+    appearance->updateLightSources();
+
+    return appearance;
+
+}
+GLAppearance* ChessGame::getWhiteTileAppearance() {
+    GLAppearance* appearance = new GLAppearance("../../data/shaders/multi_vertex_lights_ext.vs", "../../data/shaders/multi_vertex_lights.fs");
+
+    appearance->addLightSource(_default_light_source);
+    appearance->setMaterial(_white_tile_material);
+    appearance->finalize();
+
+    // If you want to change appearance parameters after you init the object, call the update function
+    appearance->updateLightSources();
+
+    return appearance;
+
+}
+GLAppearance* ChessGame::getBlackTileAppearance() {
+    GLAppearance* appearance = new GLAppearance("../../data/shaders/multi_vertex_lights_ext.vs", "../../data/shaders/multi_vertex_lights.fs");
+
+    appearance->addLightSource(_default_light_source);
+    appearance->setMaterial(_black_tile_material);
+    appearance->finalize();
+
+    // If you want to change appearance parameters after you init the object, call the update function
+    appearance->updateLightSources();
+
+    return appearance;
+
+}
+
+void ChessGame::initPicking() {
+    for(int i=0; i<_tiles.size(); i++)
+    {
+        Tile* tile = _tiles[i];
+    }
+
+
+    for(int i=0; i<_pieces.size(); i++)
+    {
+        ChessPiece* piece = _pieces[i];
+        ObjectId *oid = piece->getObjectId();
+        glUseProgram(piece->getProgram());
+        int l0 = glGetUniformLocation(piece->getProgram(), "select_mode");
+        int sel0 = glGetUniformLocation(piece->getProgram(), "is_selected");
+        glUniform1i(l0, false);
+        glUniform1i(sel0, false);
+        glUniform4f( glGetUniformLocation(piece->getProgram(), "select_color_id"), oid->r, oid->g, oid->b,1.0 );
+        // setPicking(piece);
+    }
+
+}
+
+void ChessGame::setPicking(GLObject* obj) {
+
+    glUseProgram(obj->getProgram());
+    int l0 = glGetUniformLocation(obj->getProgram(), "select_mode");
+    int sel0 = glGetUniformLocation(obj->getProgram(), "is_selected");
+    glUniform1i(l0, false);
+    glUniform1i(sel0, false);
+    glUniform4f( glGetUniformLocation(obj->getProgram(), "select_color_id"), 1.0,0.0,0.0,1.0 );
+
+}
+
+
+void ChessGame::preDrawPicking() {
+
+
+    for(int i=0; i<_pieces.size(); i++)
+    {
+        ChessPiece* piece = _pieces[i];
+        glUseProgram(piece->getProgram());
+        int l0 = glGetUniformLocation(piece->getProgram(), "select_mode");
+        int sel0 = glGetUniformLocation(piece->getProgram(), "is_selected");
+        glUniform1i(l0, true);
+
+        // render
+        piece->draw();
+        glUniform1i(l0, false); // and switch to regular mode.
+    }
+}
+
+void ChessGame::handleSelectedColor(float col[4]) {
+    int id = ObjectIdFactory::getIdFromColor(col);
+
+    ChessPiece* p = getObjectById(id);
+
+    if(_selected_piece != NULL) { // some thing is already selected
+        unhighlightAPiece(_selected_piece); // un highligh it
+    }
+
+    if(p != NULL) {
+        // cout << id << endl;
+        // unhighlightAPiece(_selected_piece);
+
+        _selected_piece = p;
+        highlightAPiece(p);
+
+    } else {
+
+    }
+
+}
+void ChessGame::unhighlightAPiece(ChessPiece *p) {
+    glUseProgram(p->getProgram());
+    int uniform_id = glGetUniformLocation(p->getProgram(), "is_selected");
+
+    glUniform1i(uniform_id, false);
+
+    glUseProgram(0);
+}
+
+void ChessGame::highlightAPiece(ChessPiece *p) {
+    glUseProgram(p->getProgram());
+    int uniform_id = glGetUniformLocation(p->getProgram(), "is_selected");
+
+    glUniform1i(uniform_id, true);
+
+    glUseProgram(0);
+
+}
+
+ChessPiece* ChessGame::getObjectById(int id) {
+
+    for(int i=0; i<_pieces.size(); i++)
+    {
+        ChessPiece* piece = _pieces[i];
+        if(piece->getObjectId()->id == id) return piece;
+    }
+
+    return NULL;
 
 }

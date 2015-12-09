@@ -1,3 +1,4 @@
+
 //
 //  GLSphereExt.cpp
 //  HCI557_Spotlight
@@ -51,11 +52,11 @@ void Tile::init(void)
 void Tile::draw(void)
 {
 
-    //////////////////////////////////////////////////
-    // Renders the sphere
-
-    // Enable the shader program
     glUseProgram(_program);
+
+    // Bind the buffer and switch it to an active buffer
+    glBindVertexArray(_vaoID[0]);
+
 
     // this changes the camera location
     glm::mat4 rotated_view =  rotatedViewMatrix();
@@ -63,19 +64,18 @@ void Tile::draw(void)
     glUniformMatrix4fv(_inverseViewMatrixLocation, 1, GL_FALSE, &invRotatedViewMatrix()[0][0]);
     glUniformMatrix4fv(_modelMatrixLocation, 1, GL_FALSE, &_modelMatrix[0][0]); //
 
-    // Bind the buffer and switch it to an active buffer
-    glBindVertexArray(_vaoID[0]);
 
-    //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // allows to see the primitives
+   // glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+
     // Draw the triangles
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, _num_vertices);
+    glDrawArrays(GL_TRIANGLES, 0, 2);
+
+   // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _elementbuffer);
+    //glDrawElements( GL_TRIANGLES, _elements.size(), GL_UNSIGNED_INT,(void*)0 );
+
 
     // Unbind our Vertex Array Object
     glBindVertexArray(0);
-
-    // Unbind the shader program
-    glUseProgram(0);
-
 
 }
 
@@ -101,7 +101,7 @@ void Tile::initShader(void)
 
     glBindAttribLocation(_program, 0, "in_Position");
     glBindAttribLocation(_program, 1, "in_Normal");
-    glBindAttribLocation(_program, 2, "in_TexCoord");
+    // glBindAttribLocation(_program, 2, "in_TexCoord");
 
 
 
@@ -123,10 +123,6 @@ void Tile::initShader(void)
 void Tile::initVBO(void)
 {
 
-
-    _vertex_points.clear();
-    _normal_vectors.clear();
-
     //---------------------------------------------------------
     // This creates the box geometry
     make_box(_center_x, _center_y, _center_z, _width,
@@ -145,55 +141,43 @@ void Tile::initVBO(void)
     for(int i=0; i<_vertex_points.size() ; i++)
     {
         Vertex v = _vertex_points[i];
-        vertices[(i*5)] = v.x(); vertices[(i*5)+1] = v.y(); vertices[(i*5)+2] = v.z();
-        vertices[(i*5)+3] = v.u(); vertices[(i*5)+4] = v.v();
+        vertices[(i*3)] = v.x(); vertices[(i*3)+1] = v.y(); vertices[(i*3)+2] = v.z();
 
         Vertex n = _normal_vectors[i];
         normals[(i*3)] = n.x(); normals[(i*3)+1] = n.y(); normals[(i*3)+2] = n.z();
 
     }
 
-    glUseProgram(_program);
-
 
     glGenVertexArrays(1, _vaoID); // Create our Vertex Array Object
     glBindVertexArray(_vaoID[0]); // Bind our Vertex Array Object so we can use it
 
 
-    glGenBuffers(3, _vboID); // Generate our Vertex Buffer Object
+    glGenBuffers(2, _vboID); // Generate our Vertex Buffer Object
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // vertices
+     int locPos = glGetAttribLocation(_program, "in_Position");
     glBindBuffer(GL_ARRAY_BUFFER, _vboID[0]); // Bind our Vertex Buffer Object
-    glBufferData(GL_ARRAY_BUFFER, _num_vertices * 5 * sizeof(GLfloat), vertices, GL_STATIC_DRAW); // Set the size and data of our VBO and set it to STATIC_DRAW
+    glBufferData(GL_ARRAY_BUFFER, _num_vertices * 3 * sizeof(GLfloat), vertices, GL_DYNAMIC_DRAW); // Set the size and data of our VBO and set it to STATIC_DRAW
 
-    int locPos = glGetAttribLocation(_program, "in_Position");
-    glVertexAttribPointer((GLuint)locPos, 3, GL_FLOAT, GL_FALSE, 5*sizeof(GLfloat), 0); // Set up our vertex attributes pointer
+    glVertexAttribPointer((GLuint)locPos, 3, GL_FLOAT, GL_FALSE, 0, 0); // Set up our vertex attributes pointer
     glEnableVertexAttribArray(locPos); //
 
 
-    int tex_idx = glGetAttribLocation(_program, "in_TexCoord");
-    glVertexAttribPointer((GLuint)tex_idx, 2, GL_FLOAT, GL_TRUE, 5*sizeof(GLfloat),
-                          (const GLvoid*)(3 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(tex_idx);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Normals
-    glBindBuffer(GL_ARRAY_BUFFER, _vboID[1]); // Bind our second Vertex Buffer Object
-    glBufferData(GL_ARRAY_BUFFER, _num_vertices * 3 *  sizeof(GLfloat), normals, GL_STATIC_DRAW); // Set the size and data of our VBO and set it to STATIC_DRAW
-
+     // normals
     int locNorm = glGetAttribLocation(_program, "in_Normal");
+    glBindBuffer(GL_ARRAY_BUFFER, _vboID[1]); // Bind our Vertex Buffer Object
+    glBufferData(GL_ARRAY_BUFFER, _normals.size() * 3 * sizeof(GLfloat), &normals[0], GL_STATIC_DRAW); // Set the size and data of our VBO and set it to STATIC_DRAW
+
     glVertexAttribPointer((GLuint)locNorm, 3, GL_FLOAT, GL_FALSE, 0, 0); // Set up our vertex attributes pointer
     glEnableVertexAttribArray(locNorm); //
 
-
+    // Index buffer array.
+   // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vboID[2]);
+   // glBufferData(GL_ELEMENT_ARRAY_BUFFER, _elements.size() * sizeof(unsigned int), &_elements[0], GL_STATIC_DRAW);
 
 
     glBindVertexArray(0); // Disable our Vertex Buffer Object
-
-    // delete the memory
-    delete vertices;
-    delete normals;
 }
 
 

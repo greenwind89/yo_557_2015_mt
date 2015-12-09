@@ -30,8 +30,9 @@
 #include "Shaders.h"
 
 #include "HCI557Datatypes.h"
+#include "ChessPiece.h"
 
-class Tile : public GLObject
+class Tile : public ChessPiece
 {
 public:
 

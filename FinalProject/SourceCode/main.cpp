@@ -78,6 +78,7 @@ int main(int argc, const char * argv[])
 
     ChessGame* game = new ChessGame();
 
+    game->initPicking();
     // GLObjectObj* loadedModel1 = new GLObjectObj("../../data/chessobj.obj");
 
 
@@ -93,7 +94,7 @@ int main(int argc, const char * argv[])
     // SetViewAsLookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
 
-    SetViewAsLookAt(glm::vec3(12.0f, 12.0f, 65.5f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    SetViewAsLookAt(glm::vec3(32.0f, 22.0f, 65.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 
     // Enable depth test
@@ -130,6 +131,34 @@ int main(int argc, const char * argv[])
 
         // draw the objects
         cs->draw();
+
+        /////////////////////////////////////////////////////
+        // For selection.
+        // FIRST, RENDER IN SELECT MODE
+
+        // 1. start the scissor test
+        glEnable(GL_SCISSOR_TEST);
+
+        // 2. Set the window with window size 1x1
+        // 600 is the size of the frame, make sure you know it.
+        glScissor(GetMouseX(), 600-GetMouseY(), 1, 1);
+        game->preDrawPicking();
+
+
+        glUseProgram(0);
+
+        // AT THIS LOCATION, WE HAVE TO RENDER ANY ADDITIONAL OBJECT IN "SELECT"-MODE
+        // NOTE, GLSL, OPENGL 4.5 DOES NOT PROVIDE A SELECT MODE ANYMORE, WE SIMULATE THIS MODE.
+
+        // 5. Disable the scissor test.
+        glDisable(GL_SCISSOR_TEST);
+        float col[4];
+        glReadPixels(GetMouseX(), 600-GetMouseY(), 1, 1, GL_RGB,GL_FLOAT,&col);
+
+
+        // cout << col[0] << col[1] <<col[2]<<endl;
+        game->handleSelectedColor(col);
+
 
         game->draw();
 

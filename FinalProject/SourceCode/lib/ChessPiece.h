@@ -16,6 +16,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "GLObject.h"
+#include "ObjectIdFactory.h"
 
 using namespace std;
 
@@ -59,6 +60,8 @@ public:
     */
     void updateVertices(float* vertices);
 
+    ObjectId* getObjectId();
+
 private:
 
     /*!
@@ -92,6 +95,7 @@ private:
     // file and path of the loaded object
     string                  _file_and_path;
     bool                    _file_ok;
+    ObjectId*               _object_id;
     string _model_path;
 
 protected:

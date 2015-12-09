@@ -65,6 +65,8 @@ file(GLOB HCI557_ObjLoader_SRC
     ./lib/PieceFactory.cpp
     ./lib/Tile.h
     ./lib/Tile.cpp
+    ./lib/ObjectIdFactory.h
+    ./lib/ObjectIdFactory.cpp
 )
 
 set(HCI557_RES
