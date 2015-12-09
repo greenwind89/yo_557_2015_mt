@@ -15,12 +15,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "GLObject.h"
 #include "ChessPiece.h"
 
 using namespace std;
 
-class Pawn: public ChessPiece {
-
+class PieceFactory {
 public:
-    string _model_path = "../../data/pawn.obj";
+    static ChessPiece* get(string type);
 };

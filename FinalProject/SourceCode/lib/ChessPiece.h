@@ -25,6 +25,7 @@ class ChessPiece : public GLObject
     friend class RayIntersectionTest;
 
 public:
+    ChessPiece(string filename);
     ChessPiece();
     ~ChessPiece();
 

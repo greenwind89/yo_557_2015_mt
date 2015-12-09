@@ -72,49 +72,14 @@ int main(int argc, const char * argv[])
 
 
     // create an apperance object.
-    GLAppearance* apperance_0 = new GLAppearance("../../data/shaders/multi_vertex_lights.vs", "../../data/shaders/multi_vertex_lights.fs");
-
-    GLDirectLightSource  light_source;
-    light_source._lightPos = glm::vec4(20.0,20.0,0.0, 0.0);
-    light_source._ambient_intensity = 0.2;
-    light_source._specular_intensity = 5.5;
-    light_source._diffuse_intensity = 2.0;
-    light_source._attenuation_coeff = 0.0;
-
-    // add the light to this apperance object
-    apperance_0->addLightSource(light_source);
-
-    // Create a material object
-    GLMaterial material_0;
-    material_0._diffuse_material = glm::vec3(1.0, 0.0, 0.2);
-    material_0._ambient_material = glm::vec3(1.0, 0.0, 0.2);
-    material_0._specular_material = glm::vec3(1.0, 1.0, 1.0);
-    material_0._shininess = 12.0;
-    material_0._transparency = 1.0;
-
-    // Add the material to the apperance object
-    apperance_0->setMaterial(material_0);
-    apperance_0->finalize();
 
 
-    // If you want to change appearance parameters after you init the object, call the update function
-    apperance_0->updateLightSources();
+    // GLObjectObj* loadedModel1 = new GLObjectObj("../../data/chess_board_all.obj");
 
-
-    GLObjectObj* loadedModel1 = new GLObjectObj("../../data/chess_board_all.obj");
-
-    // ChessGame* game = new ChessGame();
-    // ChessPiece* loadedModel1 = game->getChessPiecesAt(0);
+    ChessGame* game = new ChessGame();
 
     // GLObjectObj* loadedModel1 = new GLObjectObj("../../data/chessobj.obj");
 
-    loadedModel1->setApperance(*apperance_0);
-    loadedModel1->init();
-
-
-    glm::mat4 tranform = glm::scale(glm::vec3(10.0, 10.0f, 10.0f));
-    // glm::mat4 tranform =   glm::translate(glm::vec3(-100.0, -100.0f, -100.0f)) * glm::scale(glm::vec3(100.0, 100.0f, 100.0f)) ;
-    loadedModel1->setMatrix(tranform);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //// Main render loop
@@ -125,10 +90,10 @@ int main(int argc, const char * argv[])
 
     // This sets the camera to a new location
     // the first parameter is the eye position, the second the center location, and the third the up vector.
-    SetViewAsLookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+    // SetViewAsLookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
 
-    // SetViewAsLookAt(glm::vec3(12.0f, 12.0f, 65.5f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    SetViewAsLookAt(glm::vec3(12.0f, 12.0f, 65.5f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 
     // Enable depth test
@@ -166,7 +131,7 @@ int main(int argc, const char * argv[])
         // draw the objects
         cs->draw();
 
-        loadedModel1->draw();
+        game->draw();
 
 
         //// This renders the objects

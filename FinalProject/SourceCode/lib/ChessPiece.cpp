@@ -5,16 +5,19 @@
 #include <algorithm>
 
 
-ChessPiece::ChessPiece()
+ChessPiece::ChessPiece(string filename):
+_file_and_path(filename)
 {
-    string filename = "../../data/Pawn.obj";
 
-    cout << "FILENAME" << filename;
     _file_ok = false;
     _file_ok =load_obj(filename.c_str(), _vertices, _normals, _elements);
 
 }
 
+ChessPiece::ChessPiece()
+{
+
+}
 
 ChessPiece::~ChessPiece()
 {

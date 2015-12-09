@@ -16,7 +16,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "ChessPiece.h"
-#include "Pawn.h"
+#include "Tile.h"
+#include "HCI557Common.h"
 
 using namespace std;
 
@@ -24,9 +25,17 @@ class ChessGame {
 
 private:
     vector<ChessPiece*> _pieces;
+    vector<Tile*> _tiles;
+    GLAppearance* _apperance_default;
+    GLAppearance* _apperance_white_tile;
+    GLAppearance* _apperance_black_tile;
 public:
     ChessGame();
 
     ChessPiece* getChessPiecesAt(int idx);
+    void build_chess_board();
+    void build_chess_pieces();
+    void setup_light_and_material();
+    void draw();
 
 };

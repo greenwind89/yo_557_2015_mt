@@ -61,8 +61,10 @@ file(GLOB HCI557_ObjLoader_SRC
     ./lib/ChessPiece.cpp
     ./lib/ChessGame.h
     ./lib/ChessGame.cpp
-    ./lib/Pawn.h
-    ./lib/Pawn.cpp
+    ./lib/PieceFactory.h
+    ./lib/PieceFactory.cpp
+    ./lib/Tile.h
+    ./lib/Tile.cpp
 )
 
 set(HCI557_RES
