@@ -63,8 +63,6 @@ file(GLOB HCI557_ObjLoader_SRC
     ./lib/ChessGame.cpp
     ./lib/PieceFactory.h
     ./lib/PieceFactory.cpp
-    ./lib/Tile.h
-    ./lib/Tile.cpp
     ./lib/ObjectIdFactory.h
     ./lib/ObjectIdFactory.cpp
 )

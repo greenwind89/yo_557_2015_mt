@@ -16,7 +16,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "ChessPiece.h"
-#include "Tile.h"
 #include "HCI557Common.h"
 
 using namespace std;
