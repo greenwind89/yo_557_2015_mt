@@ -29,6 +29,7 @@ private:
     GLAppearance* _apperance_default;
     GLAppearance* _apperance_white_tile;
     GLAppearance* _apperance_black_tile;
+    int size_of_tile = 5;
 public:
     ChessGame();
 
