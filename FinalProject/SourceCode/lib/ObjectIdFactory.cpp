@@ -20,5 +20,5 @@ ObjectId* ObjectIdFactory::getId() {
 
 int ObjectIdFactory::getIdFromColor(float col[4]) {
     // cout << col[0] << col[1] <<col[2]<<endl;
-    return col[0] * 10 * 100 + col[1]*10*10 + col[2] * 10;
+    return round(col[0] * 10) * 100 + round(col[1]*10)*10 + round(col[2] * 10);
 }

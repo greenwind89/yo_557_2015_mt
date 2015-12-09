@@ -61,6 +61,7 @@ file(GLOB HCI557_ObjLoader_SRC
     ./lib/ChessPiece.cpp
     ./lib/ChessGame.h
     ./lib/ChessGame.cpp
+    ./lib/ChessGameAppearance.cpp
     ./lib/PieceFactory.h
     ./lib/PieceFactory.cpp
     ./lib/ObjectIdFactory.h
