@@ -15,6 +15,8 @@ ChessPiece* PieceFactory::get(string type) {
 
     if(type == "rook") return new ChessPiece("../../data/rook.obj");
 
+    if(type == "tile") return new ChessPiece("../../data/tile.obj");
+
     return new ChessPiece();
 
 }

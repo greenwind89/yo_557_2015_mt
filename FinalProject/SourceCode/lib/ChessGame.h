@@ -25,14 +25,15 @@ class ChessGame {
 
 private:
     vector<ChessPiece*> _pieces;
-    vector<Tile*> _tiles;
+    vector<ChessPiece*> _tiles;
 
     GLDirectLightSource _default_light_source;
     GLMaterial _default_material;
     GLMaterial _white_tile_material;
     GLMaterial _black_tile_material;
 
-    void setPicking(GLObject* obj);
+    void setInitPicking(ChessPiece* obj);
+    void setPreDrawPicking(ChessPiece* obj);
     ChessPiece *_selected_piece;
 
 public:

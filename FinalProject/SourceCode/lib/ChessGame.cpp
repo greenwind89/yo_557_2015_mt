@@ -21,7 +21,8 @@ void ChessGame::build_chess_board() {
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++) {
 
-            Tile* t = new Tile(size_of_tile/2 + j*size_of_tile, size_of_tile/2 + i*size_of_tile, 0, size_of_tile, size_of_tile);
+            ChessPiece* t = PieceFactory::get("tile");
+
 
             if((i + j) % 2 == 0 ) {
                 t->setApperance(*(getWhiteTileAppearance()));
@@ -31,7 +32,7 @@ void ChessGame::build_chess_board() {
 
             t->init();
 
-            glm::mat4 tranform = glm::rotate(glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));;
+            glm::mat4 tranform =  glm::rotate(glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)) * glm::translate(glm::vec3(j*size_of_tile,  i*size_of_tile, 0)) * glm::scale(glm::vec3(5.0, 5.0f, 5.0f));;
             t->setMatrix(tranform);
 
             _tiles.push_back(t);
@@ -143,7 +144,7 @@ void ChessGame::setup_light_and_material() {
 void ChessGame::draw() {
     for(int i=0; i<_tiles.size(); i++)
     {
-        Tile* tile = _tiles[i];
+        ChessPiece* tile = _tiles[i];
         tile->draw();
     }
 
@@ -198,52 +199,55 @@ GLAppearance* ChessGame::getBlackTileAppearance() {
 void ChessGame::initPicking() {
     for(int i=0; i<_tiles.size(); i++)
     {
-        Tile* tile = _tiles[i];
+        ChessPiece* tile = _tiles[i];
+        setInitPicking(tile);
     }
 
 
     for(int i=0; i<_pieces.size(); i++)
     {
         ChessPiece* piece = _pieces[i];
-        ObjectId *oid = piece->getObjectId();
-        glUseProgram(piece->getProgram());
-        int l0 = glGetUniformLocation(piece->getProgram(), "select_mode");
-        int sel0 = glGetUniformLocation(piece->getProgram(), "is_selected");
-        glUniform1i(l0, false);
-        glUniform1i(sel0, false);
-        glUniform4f( glGetUniformLocation(piece->getProgram(), "select_color_id"), oid->r, oid->g, oid->b,1.0 );
-        // setPicking(piece);
+        setInitPicking(piece);
     }
 
 }
 
-void ChessGame::setPicking(GLObject* obj) {
-
-    glUseProgram(obj->getProgram());
-    int l0 = glGetUniformLocation(obj->getProgram(), "select_mode");
-    int sel0 = glGetUniformLocation(obj->getProgram(), "is_selected");
+void ChessGame::setInitPicking(ChessPiece* piece) {
+    ObjectId *oid = piece->getObjectId();
+    glUseProgram(piece->getProgram());
+    int l0 = glGetUniformLocation(piece->getProgram(), "select_mode");
+    int sel0 = glGetUniformLocation(piece->getProgram(), "is_selected");
     glUniform1i(l0, false);
     glUniform1i(sel0, false);
-    glUniform4f( glGetUniformLocation(obj->getProgram(), "select_color_id"), 1.0,0.0,0.0,1.0 );
-
+    glUniform4f( glGetUniformLocation(piece->getProgram(), "select_color_id"), oid->r, oid->g, oid->b,1.0 );
 }
 
 
 void ChessGame::preDrawPicking() {
 
+    for(int i=0; i<_tiles.size(); i++)
+    {
+        ChessPiece* piece = _tiles[i];
+        setPreDrawPicking(piece);
+    }
 
     for(int i=0; i<_pieces.size(); i++)
     {
         ChessPiece* piece = _pieces[i];
-        glUseProgram(piece->getProgram());
-        int l0 = glGetUniformLocation(piece->getProgram(), "select_mode");
-        int sel0 = glGetUniformLocation(piece->getProgram(), "is_selected");
-        glUniform1i(l0, true);
-
-        // render
-        piece->draw();
-        glUniform1i(l0, false); // and switch to regular mode.
+        setPreDrawPicking(piece);
     }
+}
+
+void ChessGame::setPreDrawPicking(ChessPiece *piece) {
+    glUseProgram(piece->getProgram());
+    int l0 = glGetUniformLocation(piece->getProgram(), "select_mode");
+    int sel0 = glGetUniformLocation(piece->getProgram(), "is_selected");
+    glUniform1i(l0, true);
+
+    // render
+    piece->draw();
+    glUniform1i(l0, false); // and switch to regular mode.
+
 }
 
 void ChessGame::handleSelectedColor(float col[4]) {
@@ -291,6 +295,12 @@ ChessPiece* ChessGame::getObjectById(int id) {
     for(int i=0; i<_pieces.size(); i++)
     {
         ChessPiece* piece = _pieces[i];
+        if(piece->getObjectId()->id == id) return piece;
+    }
+
+    for(int i=0; i<_tiles.size(); i++)
+    {
+        ChessPiece* piece = _tiles[i];
         if(piece->getObjectId()->id == id) return piece;
     }
 
