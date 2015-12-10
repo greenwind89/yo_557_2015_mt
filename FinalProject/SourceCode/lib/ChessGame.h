@@ -27,7 +27,10 @@ private:
     vector<ChessPiece*> _tiles;
 
     GLDirectLightSource _default_light_source;
+    GLSpotLightSource _spot_light_source;
     GLMaterial _default_material;
+    GLMaterial _wood_material;
+    GLMaterial _metal_material;
     GLMaterial _white_tile_material;
     GLMaterial _black_tile_material;
 

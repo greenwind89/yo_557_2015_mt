@@ -48,6 +48,29 @@ extern Trackball trackball;
 // game instance
 ChessGame* game;
 
+bool key_flag = true;
+
+void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    bool move = false;
+    
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    // Translation
+    if( (key == 87 && action == GLFW_REPEAT) || (key == 87 && action == GLFW_PRESS) ) // key w
+    {
+        key_flag = true;
+    }
+    else if((key == 83 && action == GLFW_REPEAT) || (key == 83 && action == GLFW_PRESS)) // key s
+    {
+        key_flag = false;
+    }
+}
+
 void mouse_callback(GLFWwindow* window, int button, int action, int mods)
 {
     // button: The mouse button that was pressed or released.
@@ -124,7 +147,7 @@ int main(int argc, const char * argv[])
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // glfwSetMouseButtonCallback(window, mouse_callback);
-
+    glfwSetKeyCallback(window, keyboard_callback);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //// Main render loop
@@ -149,7 +172,7 @@ int main(int argc, const char * argv[])
         //// This renders the objects
 
         // Set the trackball locatiom
-        SetTrackballLocation(GetCurrentCameraMatrix(), GetCurrentCameraTranslation());
+        //SetTrackballLocation(GetCurrentCameraMatrix(), GetCurrentCameraTranslation());
 
         // draw the objects
         cs->draw();
@@ -183,6 +206,13 @@ int main(int argc, const char * argv[])
 
 
         game->draw();
+        
+        
+        if(key_flag){
+            SetViewAsLookAt(glm::vec3(20.0f, 50.0f, -20.0f), glm::vec3(20.0f, 0.0f, 20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        }else{
+            SetViewAsLookAt(glm::vec3(20.0f, 50.0f, 60.0f), glm::vec3(20.0f, 0.0f, 20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        }
 
 
         //// This renders the objects
