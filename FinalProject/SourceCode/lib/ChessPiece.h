@@ -26,7 +26,7 @@ class ChessPiece : public GLObject
     friend class RayIntersectionTest;
 
 public:
-    ChessPiece(string filename);
+    ChessPiece(string filename, string type);
     ChessPiece();
     ~ChessPiece();
 
@@ -61,6 +61,8 @@ public:
     void updateVertices(float* vertices);
 
     ObjectId* getObjectId();
+
+    string getType();
 
 private:
 
@@ -97,6 +99,7 @@ private:
     bool                    _file_ok;
     ObjectId*               _object_id;
     string _model_path;
+    string                  _object_type;
 
 protected:
     // The data

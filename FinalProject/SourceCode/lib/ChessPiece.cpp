@@ -5,8 +5,8 @@
 #include <algorithm>
 
 
-ChessPiece::ChessPiece(string filename):
-_file_and_path(filename)
+ChessPiece::ChessPiece(string filename, string type):
+_file_and_path(filename), _object_type(type)
 {
     _object_id = ObjectIdFactory::getId();
 
@@ -469,4 +469,8 @@ void ChessPiece::updateVertices(float* vertices)
 
 ObjectId* ChessPiece::getObjectId() {
     return _object_id;
+}
+
+string ChessPiece::getType() {
+    return _object_type;
 }
