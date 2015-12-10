@@ -45,6 +45,20 @@ GLuint program;
 /* A trackball to move and rotate the camera view */
 extern Trackball trackball;
 
+// game instance
+ChessGame* game;
+
+void mouse_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    // button: The mouse button that was pressed or released.
+    // action: One of GLFW_PRESS or GLFW_RELEASE.
+    // mods: Bit field describing which modifier keys were held down.
+
+    if(action == GLFW_RELEASE) {
+        game->handleMouseRelease();
+    }
+
+}
 
 
 int main(int argc, const char * argv[])
@@ -76,7 +90,7 @@ int main(int argc, const char * argv[])
 
     // GLObjectObj* loadedModel1 = new GLObjectObj("../../data/chess_board_all.obj");
 
-    ChessGame* game = new ChessGame();
+    game = new ChessGame();
 
     game->initPicking();
     // GLObjectObj* loadedModel1 = new GLObjectObj("../../data/chessobj.obj");
@@ -109,14 +123,22 @@ int main(int argc, const char * argv[])
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    // glfwSetMouseButtonCallback(window, mouse_callback);
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //// Main render loop
 
     // This is our render loop. As long as our window remains open (ESC is not pressed), we'll continue to render things.
+    int last_state = -1;
     while(!glfwWindowShouldClose(window))
     {
+
+        int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+        if (last_state == GLFW_PRESS && state == GLFW_RELEASE) {
+            game->handleMouseRelease();
+        }
+        last_state = state;
 
         // Clear the entire buffer with our green color (sets the background to be green).
         glClearBufferfv(GL_COLOR , 0, clear_color);

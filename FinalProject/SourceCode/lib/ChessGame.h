@@ -33,7 +33,10 @@ private:
 
     void setInitPicking(ChessPiece* obj);
     void setPreDrawPicking(ChessPiece* obj);
-    ChessPiece *_selected_piece;
+    ChessPiece * _selected_piece;
+
+    ChessPiece * _clicked_piece;
+    ChessPiece * _clicked_tile;
 
 public:
     int size_of_tile = 5;
@@ -57,6 +60,7 @@ public:
     GLAppearance* getWhiteTileAppearance();
     GLAppearance* getBlackTileAppearance();
 
+    void handleMouseRelease();
 
 
 };

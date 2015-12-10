@@ -177,12 +177,12 @@ void ChessGame::handleSelectedColor(float col[4]) {
 
     ChessPiece* p = getObjectById(id);
 
-    if(_selected_piece != NULL) { // some thing is already selected
+    if(_selected_piece != NULL && _selected_piece != _clicked_piece && _selected_piece != _clicked_tile) { // some thing is already selected
         unhighlightAPiece(_selected_piece); // un highligh it
     }
 
     if(p != NULL) {
-        cout << id << "--" << col[0] << col[1] << col[2]<< endl;
+        // cout << id << "--" << col[0] << col[1] << col[2]<< endl;
         // unhighlightAPiece(_selected_piece);
 
         _selected_piece = p;
@@ -227,5 +227,28 @@ ChessPiece* ChessGame::getObjectById(int id) {
     }
 
     return NULL;
+
+}
+
+void ChessGame::handleMouseRelease() {
+    if(_selected_piece == NULL) {
+        _clicked_piece = NULL;
+        _clicked_tile = NULL;
+        return;
+    }
+
+    if(_clicked_piece !=NULL && _selected_piece->getType() == "tile") { // click on pile
+        if(_clicked_tile) unhighlightAPiece(_clicked_tile);
+
+        _clicked_tile = _selected_piece;
+
+    } else if (_selected_piece->getType() != "tile") { // click on a piece
+        if(_clicked_piece) unhighlightAPiece(_clicked_piece);
+        if(_clicked_tile) unhighlightAPiece(_clicked_tile);
+
+        _clicked_piece = _selected_piece;
+        // highlightAPiece(_clicked_piece);
+
+    }
 
 }
