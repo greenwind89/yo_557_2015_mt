@@ -42,6 +42,10 @@ void ChessGame::build_chess_board() {
     }
 }
 
+#define PC_SCALE	4.5f
+#define PC_OFFSET_X	0.5f
+#define PC_OFFSET_Z 0.5f
+
 void ChessGame::build_chess_pieces() {
     // generate pawns
     for (size_t i = 0; i < 8; i++) {
@@ -51,7 +55,7 @@ void ChessGame::build_chess_pieces() {
         pawn1->init();
 
         // pawn is at second line
-        glm::mat4 tranform = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile, 0.0f, size_of_tile + size_of_tile/2)) * glm::scale(glm::vec3(5.0, 5.0f, 5.0f));
+        glm::mat4 tranform = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile + size_of_tile/2 + PC_OFFSET_Z)) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
         pawn1->setMatrix(tranform);
 
         _pieces.push_back(pawn1);
@@ -62,7 +66,7 @@ void ChessGame::build_chess_pieces() {
         pawn2->init();
 
         // pawn is at second line
-        glm::mat4 tranform2 = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile, 0.0f, size_of_tile*6 + size_of_tile/2)) * glm::scale(glm::vec3(5.0, 5.0f, 5.0f));
+        glm::mat4 tranform2 = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile*6 + size_of_tile/2 + PC_OFFSET_Z)) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
         pawn2->setMatrix(tranform2);
 
         _pieces.push_back(pawn2);
@@ -83,7 +87,7 @@ void ChessGame::build_chess_pieces() {
         p1->init();
 
         // pawn is at second line
-        glm::mat4 tranform = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile, 0.0f, size_of_tile/2)) * glm::scale(glm::vec3(5.0, 5.0f, 5.0f));
+        glm::mat4 tranform = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile/2 + PC_OFFSET_Z)) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
         p1->setMatrix(tranform);
 
         _pieces.push_back(p1);
@@ -94,7 +98,7 @@ void ChessGame::build_chess_pieces() {
         p2->init();
 
         // pawn is at second line
-        glm::mat4 tranform2 = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile, 0.0f, size_of_tile*7 + size_of_tile/2)) * glm::scale(glm::vec3(5.0, 5.0f, 5.0f));
+        glm::mat4 tranform2 = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile*7 + size_of_tile/2 + PC_OFFSET_Z)) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
         p2->setMatrix(tranform2);
 
         _pieces.push_back(p2);
@@ -237,7 +241,7 @@ void ChessGame::handleMouseRelease() {
         return;
     }
 
-    if(_clicked_piece !=NULL && _selected_piece->getType() == "tile") { // click on pile
+    if(_clicked_piece !=NULL && _selected_piece->getType() == "tile") { // click on tile
         if(_clicked_tile) unhighlightAPiece(_clicked_tile);
 
         _clicked_tile = _selected_piece;

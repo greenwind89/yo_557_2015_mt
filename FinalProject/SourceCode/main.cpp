@@ -186,7 +186,9 @@ int main(int argc, const char * argv[])
 
         // 2. Set the window with window size 1x1
         // 600 is the size of the frame, make sure you know it.
-        glScissor(GetMouseX(), 600-GetMouseY(), 1, 1);
+		int pxToPt = 2;
+        glScissor(GetMouseX() * pxToPt, (600 - GetMouseY()) * pxToPt, 1, 1);
+		
         game->preDrawPicking();
 
 
@@ -198,7 +200,7 @@ int main(int argc, const char * argv[])
         // 5. Disable the scissor test.
         glDisable(GL_SCISSOR_TEST);
         float col[4];
-        glReadPixels(GetMouseX(), 600-GetMouseY(), 1, 1, GL_RGB,GL_FLOAT,&col);
+        glReadPixels(GetMouseX() * pxToPt, (600 - GetMouseY()) * pxToPt, 1, 1, GL_RGB,GL_FLOAT,&col);
 
 
         // cout << col[0] << col[1] <<col[2]<<endl;
