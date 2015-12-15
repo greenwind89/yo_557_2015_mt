@@ -256,7 +256,7 @@ void ChessGame::handleMouseRelease() {
     }
 }
 
-#define MOVE_SPEED	0.05f
+#define MOVE_SPEED	0.1f
 
 void ChessGame::handleKeyPress(int key, int action) {
 	bool move = false;
