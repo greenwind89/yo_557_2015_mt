@@ -14,6 +14,7 @@
 #define GLM_FORCE_INLINE
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
 
 #include "GLObject.h"
 #include "ObjectIdFactory.h"
@@ -63,6 +64,8 @@ public:
     ObjectId* getObjectId();
 
     string getType();
+	
+	void translatePiece(glm::vec3);
 
 private:
 

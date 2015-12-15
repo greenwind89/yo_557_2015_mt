@@ -63,7 +63,6 @@ public:
     GLAppearance* getWhiteTileAppearance();
     GLAppearance* getBlackTileAppearance();
 
-    void handleMouseRelease();
-
-
+	void handleMouseRelease();
+	void handleKeyPress(int, int);
 };

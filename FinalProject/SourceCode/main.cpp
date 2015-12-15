@@ -50,15 +50,16 @@ ChessGame* game;
 
 bool key_flag = true;
 
+
+
+
 void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    bool move = false;
-    
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     {
         glfwSetWindowShouldClose(window, GL_TRUE);
     }
-    
+	
     ////////////////////////////////////////////////////////////////////////////////////////////
     // Translation
     if( (key == 87 && action == GLFW_REPEAT) || (key == 87 && action == GLFW_PRESS) ) // key w
@@ -68,8 +69,13 @@ void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, in
     else if((key == 83 && action == GLFW_REPEAT) || (key == 83 && action == GLFW_PRESS)) // key s
     {
         key_flag = false;
-    }
+	}
+	else
+	{
+		game->handleKeyPress(key, action);
+	}
 }
+
 
 void mouse_callback(GLFWwindow* window, int button, int action, int mods)
 {

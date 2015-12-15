@@ -474,3 +474,9 @@ ObjectId* ChessPiece::getObjectId() {
 string ChessPiece::getType() {
     return _object_type;
 }
+
+void ChessPiece::translatePiece(glm::vec3 trans) {
+	glm::mat4 m2 = glm::translate(_modelMatrix, trans);
+	setMatrix(m2);
+}
+

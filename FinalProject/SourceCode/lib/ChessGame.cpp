@@ -254,5 +254,39 @@ void ChessGame::handleMouseRelease() {
         // highlightAPiece(_clicked_piece);
 
     }
+}
 
+#define MOVE_SPEED	0.05f
+
+void ChessGame::handleKeyPress(int key, int action) {
+	bool move = false;
+	
+	if (_clicked_piece)
+	{
+		if(key == GLFW_KEY_UP)
+		{
+			_clicked_piece->translatePiece(glm::vec3(0.0, 0.0f, MOVE_SPEED));
+			move = true;
+		}
+		else if(key == GLFW_KEY_LEFT)
+		{
+			_clicked_piece->translatePiece(glm::vec3(MOVE_SPEED, 0.0f, 0.0f));
+			move = true;
+		}
+		else if(key == GLFW_KEY_DOWN)
+		{
+			_clicked_piece->translatePiece(glm::vec3(0.0, 0.0f, -MOVE_SPEED));
+			move = true;
+		}
+		else if(key == GLFW_KEY_RIGHT)
+		{
+			_clicked_piece->translatePiece(glm::vec3(-MOVE_SPEED, 0.0f, 0.0f));
+			move = true;
+		}
+		
+		if(move)
+		{
+			// Collision detection
+		}
+	}
 }
