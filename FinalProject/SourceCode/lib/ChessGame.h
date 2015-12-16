@@ -35,6 +35,8 @@ private:
     GLSpotLightSource _set_1_spot_light_source_2;
     GLSpotLightSource _set_1_spot_light_source_3;
 
+    GLSpotLightSource _set_2_spot_light_source;
+
 
     GLMaterial _default_material;
     GLMaterial _wood_material;

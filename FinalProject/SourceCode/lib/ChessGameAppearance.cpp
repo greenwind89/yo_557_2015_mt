@@ -93,6 +93,14 @@ void ChessGame::setup_light_and_material() {
     _set_1_material._transparency = 0.9;
 
     // set 2
+    _set_2_spot_light_source._lightPos = glm::vec4(22.5, 15.0, 32.0, 1.0);
+    _set_2_spot_light_source._ambient_intensity = 0.3;
+    _set_2_spot_light_source._specular_intensity = 1.0;
+    _set_2_spot_light_source._diffuse_intensity = 10.0;
+    _set_2_spot_light_source._attenuation_coeff = 0.005;
+    _set_2_spot_light_source._cone_angle = 30;
+    _set_2_spot_light_source._cone_direction = glm::vec3(22.5, -1.0, 37.0);
+
     _set_2_material._diffuse_material = glm::vec3(0.10, 0.0, 0.0);
     _set_2_material._ambient_material = glm::vec3(0.10, 0.0, 0.0);
     _set_2_material._specular_material = glm::vec3(0.10, 0.0, 0.0);
@@ -248,6 +256,7 @@ GLAppearance* ChessGame::getSet2Appearance() {
 
     appearance->addLightSource(_default_light_source);
     appearance->addLightSource(_spot_light_source);
+    appearance->addLightSource(_set_2_spot_light_source);
     appearance->setMaterial(_set_2_material);
     appearance->finalize();
 
