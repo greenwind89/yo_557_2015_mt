@@ -232,6 +232,7 @@ GLAppearance* ChessGame::getSet1Appearance() {
     appearance->addLightSource(_set_1_spot_light_source);
     appearance->addLightSource(_set_1_spot_light_source_2);
     // appearance->addLightSource(_set_1_spot_light_source_3);
+    appearance->addLightSource(_default_light_source);
     appearance->setMaterial(_set_1_material);
     appearance->finalize();
 
