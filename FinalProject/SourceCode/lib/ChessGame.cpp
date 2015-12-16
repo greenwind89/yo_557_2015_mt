@@ -8,6 +8,7 @@ ChessGame::ChessGame() {
     setup_light_and_material();
     build_chess_board();
     build_chess_pieces();
+    add_extra_board_layer();
 }
 
 
@@ -118,6 +119,8 @@ void ChessGame::draw() {
         ChessPiece* piece = _pieces[i];
         piece->draw();
     }
+
+    draw_extra_layer();
 
 }
 
@@ -260,7 +263,7 @@ void ChessGame::handleMouseRelease() {
 
 void ChessGame::handleKeyPress(int key, int action) {
 	bool move = false;
-	
+
 	if (_clicked_piece)
 	{
 		if(key == GLFW_KEY_UP)
@@ -283,7 +286,7 @@ void ChessGame::handleKeyPress(int key, int action) {
 			_clicked_piece->translatePiece(glm::vec3(-MOVE_SPEED, 0.0f, 0.0f));
 			move = true;
 		}
-		
+
 		if(move)
 		{
 			// Collision detection

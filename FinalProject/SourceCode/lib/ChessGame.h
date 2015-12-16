@@ -17,6 +17,7 @@
 
 #include "ChessPiece.h"
 #include "HCI557Common.h"
+#include "Plane3D.h"
 
 using namespace std;
 
@@ -40,6 +41,7 @@ private:
 
     ChessPiece * _clicked_piece;
     ChessPiece * _clicked_tile;
+    GLPlane3D * _extra_layer;
 
 public:
     int size_of_tile = 5;
@@ -57,12 +59,18 @@ public:
     void unhighlightAPiece(ChessPiece* p);
     void highlightAPiece(ChessPiece* p);
 
+    void add_extra_board_layer();
+
     ChessPiece* getObjectById(int id);
 
     GLAppearance* getDefaultAppearance();
     GLAppearance* getWhiteTileAppearance();
     GLAppearance* getBlackTileAppearance();
+    GLAppearance* getWaterAppearance();
 
 	void handleMouseRelease();
 	void handleKeyPress(int, int);
+
+    void draw_extra_layer();
+    int location;
 };

@@ -59,7 +59,7 @@ void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, in
     {
         glfwSetWindowShouldClose(window, GL_TRUE);
     }
-	
+
     ////////////////////////////////////////////////////////////////////////////////////////////
     // Translation
     if( (key == 87 && action == GLFW_REPEAT) || (key == 87 && action == GLFW_PRESS) ) // key w
@@ -178,7 +178,7 @@ int main(int argc, const char * argv[])
         //// This renders the objects
 
         // Set the trackball locatiom
-        //SetTrackballLocation(GetCurrentCameraMatrix(), GetCurrentCameraTranslation());
+        // SetTrackballLocation(GetCurrentCameraMatrix(), GetCurrentCameraTranslation());
 
         // draw the objects
         cs->draw();
@@ -192,9 +192,9 @@ int main(int argc, const char * argv[])
 
         // 2. Set the window with window size 1x1
         // 600 is the size of the frame, make sure you know it.
-		int pxToPt = 2;
+		int pxToPt = 1;
         glScissor(GetMouseX() * pxToPt, (600 - GetMouseY()) * pxToPt, 1, 1);
-		
+
         game->preDrawPicking();
 
 
@@ -214,8 +214,8 @@ int main(int argc, const char * argv[])
 
 
         game->draw();
-        
-        
+
+
         if(key_flag){
             SetViewAsLookAt(glm::vec3(20.0f, 50.0f, -20.0f), glm::vec3(20.0f, 0.0f, 20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         }else{
