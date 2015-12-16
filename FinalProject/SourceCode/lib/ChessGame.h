@@ -29,11 +29,21 @@ private:
 
     GLDirectLightSource _default_light_source;
     GLSpotLightSource _spot_light_source;
+
+    GLDirectLightSource _set_1_light_source;
+    GLSpotLightSource _set_1_spot_light_source;
+    GLSpotLightSource _set_1_spot_light_source_2;
+    GLSpotLightSource _set_1_spot_light_source_3;
+
+
     GLMaterial _default_material;
     GLMaterial _wood_material;
     GLMaterial _metal_material;
     GLMaterial _white_tile_material;
     GLMaterial _black_tile_material;
+
+    GLMaterial _set_1_material;
+    GLMaterial _set_2_material;
 
     void setInitPicking(ChessPiece* obj);
     void setPreDrawPicking(ChessPiece* obj);
@@ -67,6 +77,8 @@ public:
     GLAppearance* getWhiteTileAppearance();
     GLAppearance* getBlackTileAppearance();
     GLAppearance* getWaterAppearance();
+    GLAppearance* getSet1Appearance();
+    GLAppearance* getSet2Appearance();
 
 	void handleMouseRelease();
 	void handleKeyPress(int, int);

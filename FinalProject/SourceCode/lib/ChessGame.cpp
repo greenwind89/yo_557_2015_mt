@@ -52,7 +52,7 @@ void ChessGame::build_chess_pieces() {
     for (size_t i = 0; i < 8; i++) {
         ChessPiece* pawn1 = PieceFactory::get("pawn");
 
-        pawn1->setApperance(*(getDefaultAppearance()));
+        pawn1->setApperance(*(getSet1Appearance()));
         pawn1->init();
 
         // pawn is at second line
@@ -63,7 +63,7 @@ void ChessGame::build_chess_pieces() {
 
         ChessPiece* pawn2 = PieceFactory::get("pawn");
 
-        pawn2->setApperance(*(getDefaultAppearance()));
+        pawn2->setApperance(*(getSet2Appearance()));
         pawn2->init();
 
         // pawn is at second line
@@ -84,7 +84,7 @@ void ChessGame::build_chess_pieces() {
 
         ChessPiece* p1 = PieceFactory::get(type);
 
-        p1->setApperance(*(getDefaultAppearance()));
+        p1->setApperance(*(getSet1Appearance()));
         p1->init();
 
         // pawn is at second line
@@ -95,7 +95,7 @@ void ChessGame::build_chess_pieces() {
 
         ChessPiece* p2 = PieceFactory::get(type);
 
-        p2->setApperance(*(getDefaultAppearance()));
+        p2->setApperance(*(getSet2Appearance()));
         p2->init();
 
         // pawn is at second line

@@ -54,6 +54,51 @@ void ChessGame::setup_light_and_material() {
     _black_tile_material._shininess = 12.0;
     _black_tile_material._transparency = 1.0;
 
+    // set 1
+    _set_1_light_source._lightPos = glm::vec4(10.0, 10.0,40.0, 1.0);
+    _set_1_light_source._ambient_intensity = 0.2;
+    _set_1_light_source._specular_intensity = 5.5;
+    _set_1_light_source._diffuse_intensity = 2.0;
+    _set_1_light_source._attenuation_coeff = 0.0;
+
+    _set_1_spot_light_source._lightPos = glm::vec4(20.0, 10.0, -5.0, 1.0);
+    _set_1_spot_light_source._ambient_intensity = 0.3;
+    _set_1_spot_light_source._specular_intensity = 1.0;
+    _set_1_spot_light_source._diffuse_intensity = 10.0;
+    _set_1_spot_light_source._attenuation_coeff = 0.005;
+    _set_1_spot_light_source._cone_angle = 20;
+    _set_1_spot_light_source._cone_direction = glm::vec3(1.0, -1.0, 1.0);
+
+    _set_1_spot_light_source_2._lightPos = glm::vec4(-3.0, 10.0, -7.0, 1.0);
+    _set_1_spot_light_source_2._ambient_intensity = 0.3;
+    _set_1_spot_light_source_2._specular_intensity = 1.0;
+    _set_1_spot_light_source_2._diffuse_intensity = 10.0;
+    _set_1_spot_light_source_2._attenuation_coeff = 0.005;
+    _set_1_spot_light_source_2._cone_angle = 25;
+    _set_1_spot_light_source_2._cone_direction = glm::vec3(5.0, -1.0, 1.0);
+
+    _set_1_spot_light_source_3._lightPos = glm::vec4(22.5, 30.0, 2.5, 1.0);
+    _set_1_spot_light_source_3._ambient_intensity = 0.3;
+    _set_1_spot_light_source_3._specular_intensity = 10.0;
+    _set_1_spot_light_source_3._diffuse_intensity = 7.0;
+    _set_1_spot_light_source_3._attenuation_coeff = 0.005;
+    _set_1_spot_light_source_3._cone_angle = 25;
+    _set_1_spot_light_source_3._cone_direction = glm::vec3(22.5, -1.0, 2.5);
+
+    _set_1_material._diffuse_material = glm::vec3(0.0, 0.0, 0.10);
+    _set_1_material._ambient_material = glm::vec3(0.0, 0.0, 0.10);
+    _set_1_material._specular_material = glm::vec3(0.0, 0.0, 0.10);
+
+    _set_1_material._shininess = 12.0;
+    _set_1_material._transparency = 0.9;
+
+    // set 2
+    _set_2_material._diffuse_material = glm::vec3(0.10, 0.0, 0.0);
+    _set_2_material._ambient_material = glm::vec3(0.10, 0.0, 0.0);
+    _set_2_material._specular_material = glm::vec3(0.10, 0.0, 0.0);
+
+    _set_2_material._shininess = 12.0;
+    _set_2_material._transparency = 0.9;
 }
 
 GLAppearance* ChessGame::getDefaultAppearance() {
@@ -178,4 +223,36 @@ void ChessGame::draw_extra_layer() {
     glUniform1f(location, delta);
 
     if(_extra_layer != NULL) _extra_layer->draw();
+}
+
+GLAppearance* ChessGame::getSet1Appearance() {
+    GLAppearance* appearance = new GLAppearance("../../data/shaders/multi_vertex_lights_ext.vs", "../../data/shaders/multi_vertex_lights.fs");
+
+    appearance->addLightSource(_set_1_light_source);
+    appearance->addLightSource(_set_1_spot_light_source);
+    appearance->addLightSource(_set_1_spot_light_source_2);
+    // appearance->addLightSource(_set_1_spot_light_source_3);
+    appearance->setMaterial(_set_1_material);
+    appearance->finalize();
+
+    // If you want to change appearance parameters after you init the object, call the update function
+    appearance->updateLightSources();
+
+    return appearance;
+
+}
+
+GLAppearance* ChessGame::getSet2Appearance() {
+    GLAppearance* appearance = new GLAppearance("../../data/shaders/multi_vertex_lights_ext.vs", "../../data/shaders/multi_vertex_lights.fs");
+
+    appearance->addLightSource(_default_light_source);
+    appearance->addLightSource(_spot_light_source);
+    appearance->setMaterial(_set_2_material);
+    appearance->finalize();
+
+    // If you want to change appearance parameters after you init the object, call the update function
+    appearance->updateLightSources();
+
+    return appearance;
+
 }
