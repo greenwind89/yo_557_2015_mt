@@ -53,6 +53,10 @@ file(GLOB HCI557_ObjLoader_SRC
     ../gl_common/GLAppearanceBase.h
     ../gl_common/GLAppearance.h
     ../gl_common/GLAppearance.cpp
+    ../gl_common/Texture.h
+    ../gl_common/Texture.cpp
+    ../gl_common/Plane3D.h
+    ../gl_common/Plane3D.cpp
 	../gl_common/camera.h
 	../gl_common/camera.cpp
     ../gl_common/GLObjectObj.h

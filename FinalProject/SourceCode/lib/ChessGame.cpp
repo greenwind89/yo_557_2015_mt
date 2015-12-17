@@ -16,6 +16,7 @@ ChessGame::ChessGame() {
     setup_light_and_material();
     build_chess_board();
     build_chess_pieces();
+    add_extra_board_layer();
 }
 
 
@@ -59,7 +60,7 @@ void ChessGame::build_chess_pieces() {
     for (size_t i = 0; i < 8; i++) {
         ChessPiece* pawn1 = PieceFactory::get("pawn");
 
-        pawn1->setApperance(*(getDefaultAppearance()));
+        pawn1->setApperance(*(getSet1Appearance()));
         pawn1->init();
 
         // pawn is at second line
@@ -73,7 +74,7 @@ void ChessGame::build_chess_pieces() {
 
         ChessPiece* pawn2 = PieceFactory::get("pawn");
 
-        pawn2->setApperance(*(getDefaultAppearance()));
+        pawn2->setApperance(*(getSet2Appearance()));
         pawn2->init();
 
         // pawn is at second line
@@ -97,7 +98,7 @@ void ChessGame::build_chess_pieces() {
 
         ChessPiece* p1 = PieceFactory::get(type);
 
-        p1->setApperance(*(getDefaultAppearance()));
+        p1->setApperance(*(getSet1Appearance()));
         p1->init();
 
 		// pawn is at second line
@@ -111,7 +112,7 @@ void ChessGame::build_chess_pieces() {
 
         ChessPiece* p2 = PieceFactory::get(type);
 
-        p2->setApperance(*(getDefaultAppearance()));
+        p2->setApperance(*(getSet2Appearance()));
         p2->init();
 
         // pawn is at second line
@@ -138,6 +139,8 @@ void ChessGame::draw() {
         ChessPiece* piece = _pieces[i];
         piece->draw();
     }
+
+    draw_extra_layer();
 
 }
 
@@ -283,7 +286,7 @@ void ChessGame::handleMouseRelease() {
 
 void ChessGame::handleKeyPress(int key, int action) {
 	bool move = false;
-	
+
 	if (_clicked_piece)
 	{
 		if(key == GLFW_KEY_UP)
@@ -306,7 +309,7 @@ void ChessGame::handleKeyPress(int key, int action) {
 			_clicked_piece->translatePiece(moveRight);
 			move = true;
 		}
-		
+
 		if(move)
 		{
 //			cout << _clicked_piece->getLocation().x << " " << _clicked_piece->getLocation().z << endl;

@@ -127,7 +127,7 @@ private:
 #ifdef WIN32
     static string      _glsl_names[];
 #else
-    const string      _glsl_names[4] = { "texture_background", "texture_foreground", "texture_foreground1", "texture_blend"};
+    const string      _glsl_names[3] = { "texture_background", "texture_foreground", "texture_blend"};
 #endif
     
     
@@ -142,7 +142,7 @@ public:
      @param path_and_file_texture_1 - path and file of the second image.
      @return int - the texture id when the texture was sucessfully loaded.
      */
-    int loadAndCreateTextures(string path_and_file_texture_1, string path_and_file_texture_2, string path_and_file_texture_3);
+    int loadAndCreateTextures(string path_and_file_texture_1, string path_and_file_texture_2);
     
     /*!
      This sets the texture blend model
@@ -173,7 +173,6 @@ private:
     // The texture for this program.
     GLuint      _texture_1;
     GLuint      _texture_2;
-    GLuint      _texture_3;
     
     // The blending mode for this texture
     int         _texture_blend_mode;
@@ -181,7 +180,6 @@ private:
     // location of the texture in the glsl program
     int         _textureIdx1;
     int         _textureIdx2;
-    int         _textureIdx3;
     int         _textureBlendModelIdx;
     
     
