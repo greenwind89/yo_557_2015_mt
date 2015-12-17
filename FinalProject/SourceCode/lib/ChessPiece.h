@@ -16,18 +16,18 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 
-#include "GLObject.h"
+#include "GLObjectObj.h"
 #include "ObjectIdFactory.h"
 
 using namespace std;
 
-class ChessPiece : public GLObject
+class ChessPiece : public GLObjectObj
 {
     // Ray intersection test has access to protected functions
     friend class RayIntersectionTest;
 
 public:
-    ChessPiece(string filename, string type);
+	ChessPiece(string filename, string type);
     ChessPiece();
     ~ChessPiece();
 
@@ -64,6 +64,12 @@ public:
     ObjectId* getObjectId();
 
     string getType();
+	
+	void setPlayer(int);
+	int getPlayer();
+	
+	void setLocation(glm::vec3);
+	glm::vec3 getLocation();
 	
 	void translatePiece(glm::vec3);
 
@@ -102,14 +108,9 @@ private:
     bool                    _file_ok;
     ObjectId*               _object_id;
     string _model_path;
-    string                  _object_type;
-
-protected:
-    // The data
-    vector<glm::vec3>       _vertices;
-    vector<glm::vec4>       _vertex_colors;
-    vector<glm::vec3>       _normals;
-    vector<GLuint>          _elements;
+	string                  _object_type;
+	int						_object_player;
+	glm::vec3				_object_location;
 
 private:
     // obj file data

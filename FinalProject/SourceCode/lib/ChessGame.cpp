@@ -1,8 +1,16 @@
 
 #include "ChessGame.h"
 #include "PieceFactory.h"
+#include "RayIntersectionTest.h"
 
 #include <algorithm>
+
+#define MOVE_SPEED	0.1f
+
+const glm::vec3 moveUp(0.0, 0.0f, MOVE_SPEED);
+const glm::vec3 moveDown(0.0, 0.0f, -MOVE_SPEED);
+const glm::vec3 moveLeft(MOVE_SPEED, 0.0f, 0.0f);
+const glm::vec3 moveRight(-MOVE_SPEED, 0.0f, 0.0f);
 
 ChessGame::ChessGame() {
     setup_light_and_material();
@@ -55,8 +63,11 @@ void ChessGame::build_chess_pieces() {
         pawn1->init();
 
         // pawn is at second line
-        glm::mat4 tranform = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile + size_of_tile/2 + PC_OFFSET_Z)) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
+		glm::vec3 loc(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile + size_of_tile/2 + PC_OFFSET_Z);
+        glm::mat4 tranform = glm::translate(loc) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
         pawn1->setMatrix(tranform);
+		pawn1->setLocation(loc);
+		pawn1->setPlayer(1);
 
         _pieces.push_back(pawn1);
 
@@ -66,8 +77,11 @@ void ChessGame::build_chess_pieces() {
         pawn2->init();
 
         // pawn is at second line
-        glm::mat4 tranform2 = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile*6 + size_of_tile/2 + PC_OFFSET_Z)) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
-        pawn2->setMatrix(tranform2);
+		loc = glm::vec3(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile*6 + size_of_tile/2 + PC_OFFSET_Z);
+        glm::mat4 tranform2 = glm::translate(loc) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
+		pawn2->setMatrix(tranform2);
+		pawn2->setLocation(loc);
+		pawn2->setPlayer(2);
 
         _pieces.push_back(pawn2);
     }
@@ -86,9 +100,12 @@ void ChessGame::build_chess_pieces() {
         p1->setApperance(*(getDefaultAppearance()));
         p1->init();
 
-        // pawn is at second line
-        glm::mat4 tranform = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile/2 + PC_OFFSET_Z)) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
-        p1->setMatrix(tranform);
+		// pawn is at second line
+		glm::vec3 loc(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile/2 + PC_OFFSET_Z);
+        glm::mat4 tranform = glm::translate(loc) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
+		p1->setMatrix(tranform);
+		p1->setLocation(loc);
+		p1->setPlayer(1);
 
         _pieces.push_back(p1);
 
@@ -98,8 +115,11 @@ void ChessGame::build_chess_pieces() {
         p2->init();
 
         // pawn is at second line
-        glm::mat4 tranform2 = glm::translate(glm::vec3(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile*7 + size_of_tile/2 + PC_OFFSET_Z)) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
-        p2->setMatrix(tranform2);
+		loc = glm::vec3(size_of_tile/2 + i*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile*7 + size_of_tile/2 + PC_OFFSET_Z);
+        glm::mat4 tranform2 = glm::translate(loc) * glm::scale(glm::vec3(PC_SCALE, PC_SCALE, PC_SCALE));
+		p2->setMatrix(tranform2);
+		p2->setLocation(loc);
+		p2->setPlayer(2);
 
         _pieces.push_back(p2);
     }
@@ -167,7 +187,7 @@ void ChessGame::preDrawPicking() {
 void ChessGame::setPreDrawPicking(ChessPiece *piece) {
     glUseProgram(piece->getProgram());
     int l0 = glGetUniformLocation(piece->getProgram(), "select_mode");
-    int sel0 = glGetUniformLocation(piece->getProgram(), "is_selected");
+//    int sel0 = glGetUniformLocation(piece->getProgram(), "is_selected");
     glUniform1i(l0, true);
 
     // render
@@ -256,7 +276,10 @@ void ChessGame::handleMouseRelease() {
     }
 }
 
-#define MOVE_SPEED	0.1f
+//const glm::vec3 moveUp(0.0, 0.0f, MOVE_SPEED);
+//const glm::vec3 moveDown(0.0, 0.0f, -MOVE_SPEED);
+//const glm::vec3 moveLeft(MOVE_SPEED, 0.0f, 0.0f);
+//const glm::vec3 moveRight(-MOVE_SPEED, 0.0f, 0.0f);
 
 void ChessGame::handleKeyPress(int key, int action) {
 	bool move = false;
@@ -265,28 +288,67 @@ void ChessGame::handleKeyPress(int key, int action) {
 	{
 		if(key == GLFW_KEY_UP)
 		{
-			_clicked_piece->translatePiece(glm::vec3(0.0, 0.0f, MOVE_SPEED));
-			move = true;
-		}
-		else if(key == GLFW_KEY_LEFT)
-		{
-			_clicked_piece->translatePiece(glm::vec3(MOVE_SPEED, 0.0f, 0.0f));
+			_clicked_piece->translatePiece(moveUp);
 			move = true;
 		}
 		else if(key == GLFW_KEY_DOWN)
 		{
-			_clicked_piece->translatePiece(glm::vec3(0.0, 0.0f, -MOVE_SPEED));
+			_clicked_piece->translatePiece(moveDown);
+			move = true;
+		}
+		else if(key == GLFW_KEY_LEFT)
+		{
+			_clicked_piece->translatePiece(moveLeft);
 			move = true;
 		}
 		else if(key == GLFW_KEY_RIGHT)
 		{
-			_clicked_piece->translatePiece(glm::vec3(-MOVE_SPEED, 0.0f, 0.0f));
+			_clicked_piece->translatePiece(moveRight);
 			move = true;
 		}
 		
 		if(move)
 		{
-			// Collision detection
+//			cout << _clicked_piece->getLocation().x << " " << _clicked_piece->getLocation().z << endl;
+			int count = 0;
+			for (int i = 0; i < _pieces.size(); i++)
+			{
+				ChessPiece *p = _pieces[i];
+				glm::vec3 s = _clicked_piece->getLocation();
+
+				if (p->getPlayer() != _clicked_piece->getPlayer() &&
+					sqrt(pow(s.x - p->getLocation().x,2) + pow(s.z - p->getLocation().z,2)) < size_of_tile)
+				{
+					_intersectList.clear();
+					count++;
+					
+					glm::vec3 e = s + (float)size_of_tile * moveUp / MOVE_SPEED;
+//					glm::vec3 e = s + glm::vec3(0.f, 0.f, 20.f);
+					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
+						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+					}
+					
+					e = s + (float)size_of_tile * moveDown / MOVE_SPEED;
+//					e = s + glm::vec3(0.f, 0.f, -20.f);
+					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
+						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+					}
+					
+					e = s + (float)size_of_tile * moveLeft / MOVE_SPEED;
+//					e = s + glm::vec3(20.f, 0.f, 0.f);
+//					cout << e.x << " " << e.z << endl;
+					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
+						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+					}
+					
+					e = s + (float)size_of_tile * moveRight / MOVE_SPEED;
+//					e = s + glm::vec3(-20.f, 0.f, 0.f);
+					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
+						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+					}
+				}
+			}
+			cout << endl << "# pieces checked: " << count << endl;
 		}
 	}
 }

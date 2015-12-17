@@ -477,6 +477,27 @@ string ChessPiece::getType() {
 
 void ChessPiece::translatePiece(glm::vec3 trans) {
 	glm::mat4 m2 = glm::translate(_modelMatrix, trans);
+	_object_location = glm::vec3(m2[3][0], m2[3][1], m2[3][2]);
 	setMatrix(m2);
 }
+
+
+void ChessPiece::setPlayer(int player) {
+	_object_player = player;
+}
+
+int ChessPiece::getPlayer() {
+	return _object_player;
+}
+
+void ChessPiece::setLocation(glm::vec3 loc) {
+	_object_location = loc;
+}
+
+glm::vec3 ChessPiece::getLocation() {
+	return _object_location;
+}
+
+
+
 

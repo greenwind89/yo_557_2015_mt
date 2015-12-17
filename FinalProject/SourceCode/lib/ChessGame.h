@@ -25,6 +25,7 @@ class ChessGame {
 private:
     vector<ChessPiece*> _pieces;
     vector<ChessPiece*> _tiles;
+	vector<glm::vec3> _intersectList;
 
     GLDirectLightSource _default_light_source;
     GLSpotLightSource _spot_light_source;
