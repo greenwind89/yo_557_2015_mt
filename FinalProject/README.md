@@ -4,6 +4,6 @@ Code repository for HCI / CS / ME / CpE 557. This repository provides example co
 ## Navigation & Collision detection
 ![Collision Detection](Screenshots/collision.png)
 
-Collision is detected by rays sticking out multiple directions of the moving piece at it's base. Collision detection is only checked with pieces that are within a distance of one tile, so potentially 4 pieces will be checked if the pieces are configured properly.
+Collision is detected by rays sticking out multiple directions at the base of the moving piece. Collision detection is only checked with pieces that are within a distance of one tile, so potentially 4 are checked if pieces are configured properly.
 
-A piece is first selected and then moved using the arrow keys. Other pieces that it comes in contact with (potentially to destroy), will highlight red.
+A piece is first selected and then moved using the arrow keys. Other pieces that it comes in contact with (to overtake), will highlight red.
