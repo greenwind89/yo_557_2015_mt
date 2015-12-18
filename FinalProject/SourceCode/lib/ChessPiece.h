@@ -69,6 +69,8 @@ public:
 	int getPlayer();
 	
 	void setLocation(glm::vec3);
+    void moveToLocation(glm::vec3);
+    glm::mat4 getMatrix();
 	glm::vec3 getLocation();
 	
 	void translatePiece(glm::vec3);

@@ -84,6 +84,8 @@ public:
 	
 	void unhighlightCollision(ChessPiece* p);
 	void highlightCollision(ChessPiece* p);
+    
+    void moveAPiece(ChessPiece *piece, ChessPiece *to_position);
 
     void add_extra_board_layer();
 
@@ -98,6 +100,7 @@ public:
 
 	void handleMouseRelease();
 	void handleKeyPress(int, int);
+    void handleCollision();
 
     void draw_extra_layer();
     int location;
