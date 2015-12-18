@@ -85,7 +85,7 @@ public:
 	void unhighlightCollision(ChessPiece* p);
 	void highlightCollision(ChessPiece* p);
     
-    void moveAPiece(ChessPiece *piece, ChessPiece *to_position);
+    void movePiece(ChessPiece* current_pos, ChessPiece* to_pos);
 
     void add_extra_board_layer();
 

@@ -182,7 +182,6 @@ int main(int argc, const char * argv[])
 
         // draw the objects
         cs->draw();
-
         /////////////////////////////////////////////////////
         // For selection.
         // FIRST, RENDER IN SELECT MODE

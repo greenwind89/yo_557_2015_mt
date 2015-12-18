@@ -198,7 +198,6 @@ GLFWwindow* initWindow(void)
     // Use the window as the current context (everything that's drawn will be place in this window).
     glfwMakeContextCurrent(window);
     
-    
     // Set the keyboard callback so that when we press ESC, it knows what to do.
     glfwSetKeyCallback(window, key_callback);
     
@@ -206,7 +205,6 @@ GLFWwindow* initWindow(void)
     // set the cursor callback
     glfwSetCursorPosCallback(window, cursorCallback);
     glfwSetMouseButtonCallback(window, mouseButtonCallback);
-    
     
     return window;
 }
