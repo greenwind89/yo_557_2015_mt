@@ -22,3 +22,4 @@ Collision is detected by rays sticking out multiple directions at the base of th
 A piece is first selected and then moved using the arrow keys or by selecting a tile. Opposing pieces that it comes in contact with will be "destroyed".
 
 ## Animation
+One can choose a chess piece then choosing a tile and the selected piece will move toward the tile using keyframe animation. For intermediate locations, we simply use location in the middle of start and end location and update new location for the piece for each frame. As being described in navigation section, if having an enemy piece on the way, the piece will destroy it. 
