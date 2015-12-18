@@ -26,7 +26,13 @@ class ChessGame {
 private:
     vector<ChessPiece*> _pieces;
     vector<ChessPiece*> _tiles;
-	vector<glm::vec3> _intersectList;
+
+    vector<ChessPiece*> _animating_locations;
+    ChessPiece* _animating_piece;
+    ChessPiece* _destination_tile;
+
+
+  	vector<glm::vec3> _intersectList;
 
     GLDirectLightSource _default_light_source;
     GLSpotLightSource _spot_light_source;
@@ -55,12 +61,12 @@ private:
     ChessPiece * _clicked_piece;
     ChessPiece * _clicked_tile;
     GLPlane3D * _extra_layer;
-	
+
 	const static glm::vec3 moveUp;
 	const static glm::vec3 moveDown;
 	const static glm::vec3 moveLeft;
 	const static glm::vec3 moveRight;
-	
+
 	const static glm::vec3 rayUp;
 	const static glm::vec3 rayDown;
 	const static glm::vec3 rayLeft;
@@ -81,10 +87,10 @@ public:
 	void handleSelectedColor(float col[4]);
 	void unhighlightAPiece(ChessPiece* p);
 	void highlightAPiece(ChessPiece* p);
-	
+
 	void unhighlightCollision(ChessPiece* p);
 	void highlightCollision(ChessPiece* p);
-    
+
     void movePiece(ChessPiece* current_pos, ChessPiece* to_pos);
 
     void add_extra_board_layer();
@@ -103,5 +109,6 @@ public:
     void handleCollision();
 
     void draw_extra_layer();
+    void handle_animation();
     int location;
 };

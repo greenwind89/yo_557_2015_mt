@@ -50,7 +50,7 @@ void ChessGame::build_chess_board() {
             }
 
             t->init();
-            
+
             glm::vec3 loc(size_of_tile/2 + j*size_of_tile + PC_OFFSET_X, 0.0f, size_of_tile*i + size_of_tile/2 + PC_OFFSET_Z);
             t->setLocation(loc);
             glm::mat4 tranform =  glm::rotate(glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)) * glm::translate(glm::vec3(j*size_of_tile,  i*size_of_tile, 0)) * glm::scale(glm::vec3(5.0, 5.0f, 5.0f));;
@@ -79,7 +79,7 @@ void ChessGame::build_chess_pieces() {
 		pawn1->setPlayer(1);
 
         _pieces.push_back(pawn1);
-		
+
         ChessPiece* pawn2 = PieceFactory::get("pawn");
 
         pawn2->setApperance(*(getSet2Appearance()));
@@ -150,13 +150,15 @@ void ChessGame::draw() {
 
     draw_extra_layer();
 
+    handle_animation();
+
 }
 
 
 void ChessGame::initPicking() {
     glLoadIdentity();
     glRotatef((float)glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
-    
+
     for(int i=0; i<_tiles.size(); i++)
     {
         ChessPiece* tile = _tiles[i];
@@ -169,7 +171,7 @@ void ChessGame::initPicking() {
         ChessPiece* piece = _pieces[i];
         setInitPicking(piece);
     }
-    
+
 }
 
 void ChessGame::setInitPicking(ChessPiece* piece) {
@@ -236,36 +238,36 @@ void ChessGame::handleSelectedColor(float col[4]) {
 void ChessGame::unhighlightAPiece(ChessPiece *p) {
 	glUseProgram(p->getProgram());
 	int uniform_id = glGetUniformLocation(p->getProgram(), "is_selected");
-	
+
 	glUniform1i(uniform_id, false);
-	
+
 	glUseProgram(0);
 }
 
 void ChessGame::highlightAPiece(ChessPiece *p) {
 	glUseProgram(p->getProgram());
 	int uniform_id = glGetUniformLocation(p->getProgram(), "is_selected");
-	
+
 	glUniform1i(uniform_id, true);
-	
+
 	glUseProgram(0);
 }
 
 void ChessGame::unhighlightCollision(ChessPiece *p) {
 	glUseProgram(p->getProgram());
 	int uniform_id = glGetUniformLocation(p->getProgram(), "is_collision");
-	
+
 	glUniform1i(uniform_id, false);
-	
+
 	glUseProgram(0);
 }
 
 void ChessGame::highlightCollision(ChessPiece *p) {
 	glUseProgram(p->getProgram());
 	int uniform_id = glGetUniformLocation(p->getProgram(), "is_collision");
-	
+
 	glUniform1i(uniform_id, true);
-	
+
 	glUseProgram(0);
 }
 
@@ -288,15 +290,11 @@ ChessPiece* ChessGame::getObjectById(int id) {
 }
 
 void ChessGame::movePiece(ChessPiece *current_pos, ChessPiece * to_pos){
-    glm::vec3 direction = to_pos->getLocation()-current_pos->getLocation();
-    direction = direction.operator/=(1000);
-    while((current_pos->getLocation().x) - (to_pos->getLocation().x) >0.1 || (current_pos->getLocation().x) - (to_pos->getLocation().x) <-0.1 ||
-          (current_pos->getLocation().y) - (to_pos->getLocation().y) >0.1 || (current_pos->getLocation().y) - (to_pos->getLocation().y) <-0.1 ||
-          (current_pos->getLocation().z) - (to_pos->getLocation().z) >0.1 || (current_pos->getLocation().z) - (to_pos->getLocation().z) <-0.1
-          ){
-      current_pos->translatePiece(direction);
-        handleCollision();
-    }
+
+    _animating_piece = current_pos;
+    _destination_tile = to_pos;
+
+    // interpolating the intermediate locations
     //current_pos->moveToLocation(to_pos->getLocation());
 }
 
@@ -366,64 +364,64 @@ void ChessGame::handleCollision(){
         ChessPiece *p = _pieces[i];
         glm::vec3 s = _clicked_piece->getLocation();
         s += glm::vec3(0.f, .1f, .0f);
-        
+
         if (p->getPlayer() != _clicked_piece->getPlayer() &&
             sqrt(pow(s.x - p->getLocation().x,2) + pow(s.z - p->getLocation().z,2)) < size_of_tile)
         {
             _intersectList.clear();
             count++;
-            
+
             // Up, down, left, right rays
             glm::vec3 e = s + rayUp;
             if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
                 //cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
                 collision = true;
             }
-            
+
             e = s + rayDown;
             if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
                 //cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
                 collision = true;
             }
-            
+
             e = s + rayLeft;
             if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
                 //cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
                 collision = true;
             }
-            
+
             e = s + rayRight;
             if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
                 //cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
                 collision = true;
             }
-            
+
             // Diagonal rays (Comment if too slow)
             e = s + (sqrt(2.f)/2.f) * (rayUp + rayRight);
             if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
                 //cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
                 collision = true;
             }
-            
+
             e = s + (sqrt(2.f)/2.f) * (rayDown + rayRight);
             if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
                 //cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
                 collision = true;
             }
-            
+
             e = s + (sqrt(2.f)/2.f) * (rayDown + rayLeft);
             if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
                 //cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
                 collision = true;
             }
-            
+
             e = s + (sqrt(2.f)/2.f) * (rayUp + rayLeft);
             if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
                 //cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
                 collision = true;
             }
         }
-        
+
         if (collision)
         {
             highlightCollision(p);
@@ -433,4 +431,24 @@ void ChessGame::handleCollision(){
         }
     }
     //cout << endl << "# pieces checked: " << count << endl;
+}
+
+
+void ChessGame::handle_animation() {
+    if(_animating_piece == NULL || _destination_tile == NULL) return;
+
+    glm::vec3 direction = _destination_tile->getLocation()-_animating_piece->getLocation();
+    direction = direction.operator/=(100);
+
+    if((_animating_piece->getLocation().x) - (_destination_tile->getLocation().x) >0.1 || (_destination_tile->getLocation().x) - (_animating_piece->getLocation().x) <-0.1 ||
+          (_destination_tile->getLocation().y) - (_animating_piece->getLocation().y) >0.1 || (_destination_tile->getLocation().y) - (_animating_piece->getLocation().y) <-0.1 ||
+          (_destination_tile->getLocation().z) - (_animating_piece->getLocation().z) >0.1 || (_destination_tile->getLocation().z) - (_animating_piece->getLocation().z) <-0.1
+          ){
+       _animating_piece->translatePiece(direction);
+        handleCollision();
+    } else {
+        _animating_piece = NULL;
+        _destination_tile = NULL;
+    }
+
 }
