@@ -7,10 +7,17 @@
 
 #define MOVE_SPEED	0.1f
 
-const glm::vec3 moveUp(0.0, 0.0f, MOVE_SPEED);
-const glm::vec3 moveDown(0.0, 0.0f, -MOVE_SPEED);
-const glm::vec3 moveLeft(MOVE_SPEED, 0.0f, 0.0f);
-const glm::vec3 moveRight(-MOVE_SPEED, 0.0f, 0.0f);
+int ChessGame::size_of_tile = 5;
+
+const glm::vec3 ChessGame::moveUp(0.0f, 0.0f, MOVE_SPEED);
+const glm::vec3 ChessGame::moveDown(0.0, 0.0f, -MOVE_SPEED);
+const glm::vec3 ChessGame::moveLeft(MOVE_SPEED, 0.0f, 0.0f);
+const glm::vec3 ChessGame::moveRight(-MOVE_SPEED, 0.0f, 0.0f);
+
+const glm::vec3 ChessGame::rayUp(0.0, 0.0f, size_of_tile/2.f);
+const glm::vec3 ChessGame::rayDown(0.0, 0.0f, -size_of_tile/2.f);
+const glm::vec3 ChessGame::rayLeft(size_of_tile/2.f, 0.0f, 0.0f);
+const glm::vec3 ChessGame::rayRight(-size_of_tile/2.f, 0.0f, 0.0f);
 
 ChessGame::ChessGame() {
     setup_light_and_material();
@@ -71,7 +78,7 @@ void ChessGame::build_chess_pieces() {
 		pawn1->setPlayer(1);
 
         _pieces.push_back(pawn1);
-
+		
         ChessPiece* pawn2 = PieceFactory::get("pawn");
 
         pawn2->setApperance(*(getSet2Appearance()));
@@ -164,10 +171,12 @@ void ChessGame::initPicking() {
 void ChessGame::setInitPicking(ChessPiece* piece) {
     ObjectId *oid = piece->getObjectId();
     glUseProgram(piece->getProgram());
-    int l0 = glGetUniformLocation(piece->getProgram(), "select_mode");
-    int sel0 = glGetUniformLocation(piece->getProgram(), "is_selected");
-    glUniform1i(l0, false);
-    glUniform1i(sel0, false);
+	int l0 = glGetUniformLocation(piece->getProgram(), "select_mode");
+	int sel0 = glGetUniformLocation(piece->getProgram(), "is_selected");
+	int coll0 = glGetUniformLocation(piece->getProgram(), "is_collision");
+	glUniform1i(l0, false);
+	glUniform1i(sel0, false);
+	glUniform1i(coll0, false);
     glUniform4f( glGetUniformLocation(piece->getProgram(), "select_color_id"), oid->r, oid->g, oid->b,1.0 );
 }
 
@@ -220,23 +229,41 @@ void ChessGame::handleSelectedColor(float col[4]) {
     }
 
 }
+
 void ChessGame::unhighlightAPiece(ChessPiece *p) {
-    glUseProgram(p->getProgram());
-    int uniform_id = glGetUniformLocation(p->getProgram(), "is_selected");
-
-    glUniform1i(uniform_id, false);
-
-    glUseProgram(0);
+	glUseProgram(p->getProgram());
+	int uniform_id = glGetUniformLocation(p->getProgram(), "is_selected");
+	
+	glUniform1i(uniform_id, false);
+	
+	glUseProgram(0);
 }
 
 void ChessGame::highlightAPiece(ChessPiece *p) {
-    glUseProgram(p->getProgram());
-    int uniform_id = glGetUniformLocation(p->getProgram(), "is_selected");
+	glUseProgram(p->getProgram());
+	int uniform_id = glGetUniformLocation(p->getProgram(), "is_selected");
+	
+	glUniform1i(uniform_id, true);
+	
+	glUseProgram(0);
+}
 
-    glUniform1i(uniform_id, true);
+void ChessGame::unhighlightCollision(ChessPiece *p) {
+	glUseProgram(p->getProgram());
+	int uniform_id = glGetUniformLocation(p->getProgram(), "is_collision");
+	
+	glUniform1i(uniform_id, false);
+	
+	glUseProgram(0);
+}
 
-    glUseProgram(0);
-
+void ChessGame::highlightCollision(ChessPiece *p) {
+	glUseProgram(p->getProgram());
+	int uniform_id = glGetUniformLocation(p->getProgram(), "is_collision");
+	
+	glUniform1i(uniform_id, true);
+	
+	glUseProgram(0);
 }
 
 ChessPiece* ChessGame::getObjectById(int id) {
@@ -279,13 +306,8 @@ void ChessGame::handleMouseRelease() {
     }
 }
 
-//const glm::vec3 moveUp(0.0, 0.0f, MOVE_SPEED);
-//const glm::vec3 moveDown(0.0, 0.0f, -MOVE_SPEED);
-//const glm::vec3 moveLeft(MOVE_SPEED, 0.0f, 0.0f);
-//const glm::vec3 moveRight(-MOVE_SPEED, 0.0f, 0.0f);
-
 void ChessGame::handleKeyPress(int key, int action) {
-	bool move = false;
+	bool collision, move = false;
 
 	if (_clicked_piece)
 	{
@@ -316,8 +338,10 @@ void ChessGame::handleKeyPress(int key, int action) {
 			int count = 0;
 			for (int i = 0; i < _pieces.size(); i++)
 			{
+				collision = false;
 				ChessPiece *p = _pieces[i];
 				glm::vec3 s = _clicked_piece->getLocation();
+				s += glm::vec3(0.f, .1f, .0f);
 
 				if (p->getPlayer() != _clicked_piece->getPlayer() &&
 					sqrt(pow(s.x - p->getLocation().x,2) + pow(s.z - p->getLocation().z,2)) < size_of_tile)
@@ -325,30 +349,62 @@ void ChessGame::handleKeyPress(int key, int action) {
 					_intersectList.clear();
 					count++;
 					
-					glm::vec3 e = s + (float)size_of_tile * moveUp / MOVE_SPEED;
-//					glm::vec3 e = s + glm::vec3(0.f, 0.f, 20.f);
+					// Up, down, left, right rays
+					glm::vec3 e = s + rayUp;
 					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
 						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+						collision = true;
 					}
 					
-					e = s + (float)size_of_tile * moveDown / MOVE_SPEED;
-//					e = s + glm::vec3(0.f, 0.f, -20.f);
+					e = s + rayDown;
 					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
 						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+						collision = true;
 					}
 					
-					e = s + (float)size_of_tile * moveLeft / MOVE_SPEED;
-//					e = s + glm::vec3(20.f, 0.f, 0.f);
-//					cout << e.x << " " << e.z << endl;
+					e = s + rayLeft;
 					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
 						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+						collision = true;
 					}
 					
-					e = s + (float)size_of_tile * moveRight / MOVE_SPEED;
-//					e = s + glm::vec3(-20.f, 0.f, 0.f);
+					e = s + rayRight;
 					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
 						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+						collision = true;
 					}
+					
+					// Diagonal rays (Comment if too slow)
+					e = s + (sqrt(2.f)/2.f) * (rayUp + rayRight);
+					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
+						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+						collision = true;
+					}
+					
+					e = s + (sqrt(2.f)/2.f) * (rayDown + rayRight);
+					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
+						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+						collision = true;
+					}
+					
+					e = s + (sqrt(2.f)/2.f) * (rayDown + rayLeft);
+					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
+						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+						collision = true;
+					}
+					
+					e = s + (sqrt(2.f)/2.f) * (rayUp + rayLeft);
+					if (RayIntersectionTest::intersect(s, e, *p, _intersectList)) {
+						cout << p->getLocation().x << " " << p->getLocation().z << ",  ";
+						collision = true;
+					}
+				}
+				
+				if (collision)
+				{
+					highlightCollision(p);
+				} else {
+					unhighlightCollision(p);
 				}
 			}
 			cout << endl << "# pieces checked: " << count << endl;

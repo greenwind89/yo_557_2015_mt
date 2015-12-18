@@ -55,9 +55,19 @@ private:
     ChessPiece * _clicked_piece;
     ChessPiece * _clicked_tile;
     GLPlane3D * _extra_layer;
+	
+	const static glm::vec3 moveUp;
+	const static glm::vec3 moveDown;
+	const static glm::vec3 moveLeft;
+	const static glm::vec3 moveRight;
+	
+	const static glm::vec3 rayUp;
+	const static glm::vec3 rayDown;
+	const static glm::vec3 rayLeft;
+	const static glm::vec3 rayRight;
 
 public:
-    int size_of_tile = 5;
+    static int size_of_tile;
 
     ChessGame();
 
@@ -68,9 +78,12 @@ public:
     void draw();
     void preDrawPicking();
     void initPicking();
-    void handleSelectedColor(float col[4]);
-    void unhighlightAPiece(ChessPiece* p);
-    void highlightAPiece(ChessPiece* p);
+	void handleSelectedColor(float col[4]);
+	void unhighlightAPiece(ChessPiece* p);
+	void highlightAPiece(ChessPiece* p);
+	
+	void unhighlightCollision(ChessPiece* p);
+	void highlightCollision(ChessPiece* p);
 
     void add_extra_board_layer();
 

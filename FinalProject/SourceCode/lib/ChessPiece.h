@@ -72,6 +72,8 @@ public:
 	glm::vec3 getLocation();
 	
 	void translatePiece(glm::vec3);
+	
+	bool intersect(const glm::vec3& ray_start, const glm::vec3&  ray_stop, vector<glm::vec3>& intersect_list);
 
 private:
 
@@ -125,4 +127,5 @@ private:
     unsigned int            _vboID[3]; // Our Vertex Buffer Object
 
     GLuint                  _elementbuffer;
+	
 };

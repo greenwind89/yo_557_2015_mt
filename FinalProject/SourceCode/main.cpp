@@ -192,7 +192,7 @@ int main(int argc, const char * argv[])
 
         // 2. Set the window with window size 1x1
         // 600 is the size of the frame, make sure you know it.
-		int pxToPt = 1;
+		int pxToPt = 2;
         glScissor(GetMouseX() * pxToPt, (600 - GetMouseY()) * pxToPt, 1, 1);
 
         game->preDrawPicking();

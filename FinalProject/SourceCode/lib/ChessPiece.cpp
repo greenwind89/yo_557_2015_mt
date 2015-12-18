@@ -125,8 +125,6 @@ bool ChessPiece::load_obj(const char* filename, vector<glm::vec3> &vertices, vec
         return false;
     }
 
-
-
     vector<glm::vec3> temp_normals;
     vector<glm::vec3> temp_vertices;
     vector<glm::vec3> temp_index_normal2point;
@@ -497,7 +495,4 @@ void ChessPiece::setLocation(glm::vec3 loc) {
 glm::vec3 ChessPiece::getLocation() {
 	return _object_location;
 }
-
-
-
 

@@ -18,7 +18,11 @@ uniform vec4 select_color_id;
 uniform bool is_selected; // to indicate that this object has been selected
 
 // the color that shows up when an object has been picked
-const vec3 select_color = vec3(1.0,0.0,0.0);
+const vec3 select_color = vec3(0.0,0.6,0.0);
+
+uniform bool is_collision; // to indicate that this object is part of a collision
+
+const vec3 collision_color = vec3(1.0,0.0,0.0);
 
 uniform int numLights;
 
@@ -126,7 +130,10 @@ vec4 useLight(Light light, vec4 surfacePostion, vec4 normal_transformed, vec3 no
     {
         out_diffuse_color = select_color;
         out_ambient_color = select_color;
-    }
+	} else if (is_collision == true) {
+		out_diffuse_color = collision_color;
+		out_ambient_color = collision_color;
+	}
 
 
     // Calculate the linear color
